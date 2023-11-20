@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Ludo.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Ludo.Model
 {
-    public class Board
+    public class Board : IBoard
     {
         private const byte TilesNumber = 52;
         private const byte PlayerAreaTilesNumber = 5;
