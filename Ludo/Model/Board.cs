@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace Ludo.Model
 {
@@ -14,7 +15,7 @@ namespace Ludo.Model
         private Dictionary<Player, byte> PlayerHouseExitTile;
         private Dictionary<Player, byte> PlayerMaximumTile;
 
-        public List<Player> Tiles { get; set; }
+        public List<Tile> Tiles { get; set; }
 
         public Board(List<Player> players)
         {
@@ -23,10 +24,25 @@ namespace Ludo.Model
 
         private void InitializeBoard(List<Player> players)
         {
-            Tiles = Enumerable.Repeat<Player>(null, TilesNumber).ToList();
+            for (byte i = 0; i < TilesNumber; i++)
+            {
+                Tiles[i] = new Tile { BoardPosition = i, IsSafezone = false, CurrentOwner = null };
+            }
+            const byte maxPLayers = 4;
+            List<byte> startingPositions = new List<byte> { 0, 13, 26, 39 };
+            List<byte> endPositions = new List<byte> {50, 11, 24, 37 };
+            List<Player.PlayerColor> playerColors = Enum.GetValues(typeof(Player.PlayerColor)).Cast<Player.PlayerColor>().ToList();
 
-            List<Player.PlayerColor> playerColorsList = new List<Player.PlayerColor>(Enum.GetValues(typeof(Player.PlayerColor)) as Player.PlayerColor[]);
-            _players = playerColorsList.Select(x => new Player { Color = x }).ToList();
+            for (byte i = 0; i < maxPLayers; i++)
+            {
+                Tiles[startingPositions[i]].IsSafezone = true;
+                if (players.Count > i)
+                {
+                    players[i].Color = playerColors[i];
+                    players[i].StartPosition = startingPositions[i];
+                    players[i].EndPosition = endPositions[i];
+                }
+            }
         }
 
 
