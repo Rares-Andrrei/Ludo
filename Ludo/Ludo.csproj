@@ -70,6 +70,8 @@
     <Compile Include="Model\Pawn.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Tile.cs" />
+    <Compile Include="Service\InjectAttribute.cs" />
+    <Compile Include="Service\ServiceCollection.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
