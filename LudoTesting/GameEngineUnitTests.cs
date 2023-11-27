@@ -1,22 +1,29 @@
-using Ludo;
+using FluentAssertions;
 using Ludo.Model;
-using Newtonsoft.Json.Linq;
 
 namespace LudoTesting
 {
     [TestClass]
     public class GameEngineUnitTests
     {
+
         [TestMethod]
-        public void TestRollDice()
+        public void RollDice_ReturnValueBetween1And6_WhenCalled()
         {
             GameEngine gm = new GameEngine();
 
             for (int i = 0; i < 10; i++)
             {
                 byte value = gm.RollDice();
-                Assert.AreEqual(value >= 1 && value <= 6, true);
+
+                value.Should().BeInRange(1, 6);
             }
+        }
+
+        [TestMethod]
+        public void RollDice_ReturnRandomValues_WhenCalled()
+        {
+            GameEngine gm = new GameEngine();
 
             byte distinct = 0;
 
@@ -29,7 +36,9 @@ namespace LudoTesting
                     distinct++;
                 }
             }
-            Assert.AreEqual(distinct > 3, true);
+            distinct.Should().BeGreaterThan(3);
         }
     }
+
+
 }
