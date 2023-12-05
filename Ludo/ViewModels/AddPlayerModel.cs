@@ -12,16 +12,8 @@ namespace Ludo.ViewModels
     public class AddPlayerModel : ISubject
     {
         List<IObserver> _observers=new List<IObserver>();
-        
-        public void AddPlayer()
-        {
-            var player = new Player
-            {
-                Name = "John",
-                Color = Player.PlayerColor.Green
-            };
-            AddPlayer(player);
-        }
+      
+       
         public void AddPlayer(Player player)
         {
 
