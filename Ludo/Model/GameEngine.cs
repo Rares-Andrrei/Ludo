@@ -9,8 +9,8 @@ namespace Ludo.Model
     {
         private const byte MaximumPlayesNr = 4;
 
-        private readonly Random _random = new Random();
-        private Board _board;
+        private readonly Random random = new Random();
+        private Board board;
 
         public List<Player> Players { get; set; }
         public Player CurrentPlayerTurn { get; set; }
@@ -30,11 +30,11 @@ namespace Ludo.Model
             }
 
             Players = playersNames.Select(name => new Player { Name = name }).ToList();
-            _board = new Board(Players);
+            board = new Board(Players);
             CurrentPlayerTurn = Players[0];
         }
 
-        public Player NextPlayerTurn()
+        public void FinishedTurn()
         {
             byte index = (byte)Players.IndexOf(CurrentPlayerTurn);
             index += 1;
@@ -47,12 +47,39 @@ namespace Ludo.Model
             {
                 CurrentPlayerTurn = Players[index];
             }
-            return CurrentPlayerTurn;
         }
 
         public byte RollDice()
         {
-            return (byte)_random.Next(1, 7);
+            return (byte)random.Next(1, 7);
+        }
+
+        public bool MovePawn(Pawn pawn, byte steps)
+        {
+            return board.MovePawn(pawn, steps);
+        }
+
+        public bool CanMovePawn(Pawn pawn, byte steps)
+        {
+            return board.CanMovePawn(pawn, steps);
+        }
+
+        public bool ReleasePawnFromBase(Pawn pawn)
+        {
+            return board.ReleasePawnFromBase(pawn);
+        }
+
+        public Player CheckWinState()
+        {
+            foreach (Player player in Players)
+            {
+                if (player.Pawns.All(pawn => pawn.State == Pawn.PawnState.Finished))
+                {
+                    return player;
+                }
+            }
+            
+            return null;
         }
     }
 }

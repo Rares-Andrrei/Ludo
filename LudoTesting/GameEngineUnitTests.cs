@@ -71,7 +71,7 @@ namespace LudoTesting
         {
             _gameEngine = new GameEngine(_playerNames);
 
-            Player player = _gameEngine.NextPlayerTurn();
+            Player player = _gameEngine.FinishedTurn();
 
             player.Should().Be(_gameEngine.Players[1]);
         }
@@ -81,7 +81,7 @@ namespace LudoTesting
         {
             _gameEngine = new GameEngine(_playerNames);
 
-            _gameEngine.NextPlayerTurn();
+            _gameEngine.FinishedTurn();
             Player player = _gameEngine.CurrentPlayerTurn;
 
             player.Should().Be(_gameEngine.Players[1]);
@@ -98,13 +98,13 @@ namespace LudoTesting
             player = _gameEngine.CurrentPlayerTurn;
             player.Should().Be(_gameEngine.Players[0]);
 
-            player = _gameEngine.NextPlayerTurn();
+            player = _gameEngine.FinishedTurn();
             player.Should().Be(_gameEngine.Players[1]);
 
-            player = _gameEngine.NextPlayerTurn();
+            player = _gameEngine.FinishedTurn();
             player.Should().Be(_gameEngine.Players[2]);
 
-            player = _gameEngine.NextPlayerTurn();
+            player = _gameEngine.FinishedTurn();
             player.Should().Be(_gameEngine.Players[0]);
         }
     }

@@ -7,8 +7,11 @@ namespace Ludo.Model.Interfaces
         List<Player> Players { get; set; }
         Player CurrentPlayerTurn { get; set; }
 
-        Player NextPlayerTurn();
-
+        void FinishedTurn();
+        bool MovePawn(Pawn pawn, byte steps);
+        bool CanMovePawn(Pawn pawn, byte steps);
+        Player CheckWinState();
+        bool ReleasePawnFromBase(Pawn pawn);
         byte RollDice();
     }
 }
