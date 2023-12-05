@@ -11,13 +11,23 @@ namespace Ludo.Model
         private const byte TilesNumber = 52;
         private const byte PlayerAreaTilesNumber = 5;
 
-        private List<Player> players;
-
         public List<Tile> Tiles { get; set; }
 
         public Board(List<Player> players)
         {
             InitializeBoard(players);
+            InitializePawns(players);
+        }
+
+        private void InitializePawns(List<Player> players)
+        {
+            byte nrOfPawns = 4;
+
+            foreach (var player in players)
+            {
+                Pawn pawn = new Pawn(player);
+                player.Pawns = Enumerable.Repeat<Pawn>(pawn, nrOfPawns).ToList();
+            }
         }
 
         private void InitializeBoard(List<Player> players)

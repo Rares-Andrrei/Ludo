@@ -71,7 +71,9 @@ namespace LudoTesting
         {
             _gameEngine = new GameEngine(_playerNames);
 
-            Player player = _gameEngine.FinishedTurn();
+            _gameEngine.FinishedTurn();
+
+            Player player = _gameEngine.CurrentPlayerTurn;
 
             player.Should().Be(_gameEngine.Players[1]);
         }
@@ -98,14 +100,42 @@ namespace LudoTesting
             player = _gameEngine.CurrentPlayerTurn;
             player.Should().Be(_gameEngine.Players[0]);
 
-            player = _gameEngine.FinishedTurn();
+            _gameEngine.FinishedTurn();
+            player = _gameEngine.CurrentPlayerTurn;
             player.Should().Be(_gameEngine.Players[1]);
 
-            player = _gameEngine.FinishedTurn();
+            _gameEngine.FinishedTurn();
+            player = _gameEngine.CurrentPlayerTurn;
             player.Should().Be(_gameEngine.Players[2]);
 
-            player = _gameEngine.FinishedTurn();
+            _gameEngine.FinishedTurn();
+            player = _gameEngine.CurrentPlayerTurn;
             player.Should().Be(_gameEngine.Players[0]);
+        }
+
+        [TestMethod]
+        public void CheckWinState_CheckIfTheWinStateIsCorrect_WhenCalled()
+        {
+            _gameEngine = new GameEngine(_playerNames);
+
+            Player player = _gameEngine.CheckWinState();    
+
+            player.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ReleasePawnFromBase_CheckIfThePawnIsCorrectlyReleased_WhenCalled()
+        {
+            _gameEngine = new GameEngine(_playerNames);
+
+            foreach(var pawn in _gameEngine.Players[0].Pawns)
+            {
+                pawn.State = Pawn.PawnState.Finished;
+            }
+
+            Player winner = _gameEngine.CheckWinState();
+
+            winner.Should().Be(_gameEngine.Players[0]);
         }
     }
 
