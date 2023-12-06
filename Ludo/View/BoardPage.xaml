@@ -270,8 +270,8 @@
         <Label Grid.Row="16" Grid.Column="13" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">Jucatorul verde</Label>
 
         <!--jucator curent-->
-        <Label Content="Current Player: " Grid.Row="18" Grid.Column="3" Grid.ColumnSpan="5" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
-        <Label Grid.Row="18" Grid.Column="7" Grid.ColumnSpan="5" FontSize="20" VerticalAlignment="Center">Numele jucatorului</Label>
+        <Label Content="Current Player: " Grid.Row="18" Grid.Column="1" Grid.ColumnSpan="5" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label Grid.Row="18" Grid.Column="5" Grid.ColumnSpan="5" FontSize="20" VerticalAlignment="Center">Numele jucatorului</Label>
 
         <!--zar-->
         <Image Grid.Row="17" Grid.Column="17" Grid.ColumnSpan="3" Grid.RowSpan="3" Source="\Images\one.png" Stretch="Fill" Cursor="Hand"/>
