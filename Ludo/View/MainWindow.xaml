@@ -8,7 +8,7 @@
         Title="PURRDO"
         Height="900" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="\Images\logo.jpeg">
     <Grid>
-        <local:BoardPage />
+        <local:LobbyPage />
         <!--<local:StartingPage />-->
     </Grid>
 </Window>

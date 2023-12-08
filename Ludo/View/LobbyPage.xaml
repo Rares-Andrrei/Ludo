@@ -3,10 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Ludo.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="900" d:DesignWidth="1000">
     <Grid>
-            
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="LOBBY" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"/>
+
+        <Image Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
+        <Image Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
+        <Image Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
+        <Image Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
+
+        <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60" Width="250" FontSize="20" FontWeight="Bold" Margin="42,60,0,60">Play</Button>
+
     </Grid>
 </UserControl>
