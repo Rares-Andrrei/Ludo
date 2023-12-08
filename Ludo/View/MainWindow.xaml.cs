@@ -26,27 +26,5 @@ namespace Ludo
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Player player = new Player
-            {
-                Name = inputPlayer.Text
-            };
-            AddPlayerModel addPlayerModel = new AddPlayerModel();
-            AddPlayerObserver addPlayerObserver = new AddPlayerObserver();
-            addPlayerObserver.PlayerUpdate += PlayerUpdateHandler;
-            addPlayerModel.Attach(addPlayerObserver);
-            addPlayerObserver.player1  =player;
-            
-            
-          
-            
-        }
-
-        private void PlayerUpdateHandler(Player obj)
-        {
-           notifyPlayer.Text = obj.Name;
-        }
     }
 }
