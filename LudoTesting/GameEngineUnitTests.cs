@@ -1,6 +1,6 @@
 using FluentAssertions;
-using Ludo.Model;
-using Ludo.Model.Interfaces;
+using Ludo_Backend.Model;
+using Ludo_Backend.Model.Interfaces;
 
 namespace LudoTesting
 {
@@ -118,7 +118,7 @@ namespace LudoTesting
         {
             _gameEngine = new GameEngine(_playerNames);
 
-            Player player = _gameEngine.CheckWinState();    
+            Player player = _gameEngine.CheckWinState();
 
             player.Should().BeNull();
         }
@@ -128,7 +128,7 @@ namespace LudoTesting
         {
             _gameEngine = new GameEngine(_playerNames);
 
-            foreach(var pawn in _gameEngine.Players[0].Pawns)
+            foreach (var pawn in _gameEngine.Players[0].Pawns)
             {
                 pawn.State = Pawn.PawnState.Finished;
             }

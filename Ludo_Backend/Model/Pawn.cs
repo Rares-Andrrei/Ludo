@@ -1,4 +1,4 @@
-﻿namespace Ludo.Model
+﻿namespace Ludo_Backend.Model
 {
     public class Pawn
     {

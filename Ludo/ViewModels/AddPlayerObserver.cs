@@ -1,11 +1,6 @@
-﻿using Ludo.Model;
-using Ludo.Service;
+﻿using Ludo.Service;
+using Ludo_Backend.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Ludo.ViewModels
 {
@@ -38,6 +33,7 @@ namespace Ludo.ViewModels
 
 
         }
+
         public AddPlayerObserver() { }
     }
 }

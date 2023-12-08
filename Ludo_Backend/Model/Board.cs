@@ -1,9 +1,9 @@
-﻿using Ludo.Model.Interfaces;
+﻿using Ludo_Backend.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ludo.Model
+namespace Ludo_Backend.Model
 {
     public class Board : IBoard
     {
@@ -36,7 +36,7 @@ namespace Ludo.Model
 
             for (byte i = 0; i < TilesNumber; i++)
             {
-                Tiles[i] = new Tile { BoardPosition = i, IsSafezone = false, CurrentOwnerPawns = new List<Pawn>()};
+                Tiles[i] = new Tile { BoardPosition = i, IsSafezone = false, CurrentOwnerPawns = new List<Pawn>() };
             }
 
             List<byte> startingPositions = new List<byte> { 0, 13, 26, 39 };
@@ -88,7 +88,7 @@ namespace Ludo.Model
                     AddPawnToTile(pawn, destination);
                 }
             }
-            else if(pawn.State == Pawn.PawnState.AlmostFinished)
+            else if (pawn.State == Pawn.PawnState.AlmostFinished)
             {
                 if (destination == PlayerAreaTilesNumber + 1)
                 {
@@ -111,7 +111,7 @@ namespace Ludo.Model
             if (Tiles[destination].IsSafezone)
             {
                 return false;
-            }       
+            }
             if (Tiles[destination].CurrentOwnerPawns.Count != 0 && Tiles[destination].CurrentOwnerPawns.First().Owner != pawn.Owner)
             {
                 return true;
@@ -121,12 +121,12 @@ namespace Ludo.Model
 
         private void SolveCollision(byte destination)
         {
-           foreach(Pawn enemyPawn in Tiles[destination].CurrentOwnerPawns)
-           {
+            foreach (Pawn enemyPawn in Tiles[destination].CurrentOwnerPawns)
+            {
                 enemyPawn.Position = enemyPawn.Owner.StartPosition;
                 enemyPawn.State = Pawn.PawnState.InBase;
                 Tiles[destination].CurrentOwnerPawns.Remove(enemyPawn);
-           }
+            }
         }
 
         private void AddPawnToTile(Pawn pawn, byte tileNr)

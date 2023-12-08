@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ludo.Model.Interfaces
+namespace Ludo_Backend.Model.Interfaces
 {
     public interface IGameEngine
     {

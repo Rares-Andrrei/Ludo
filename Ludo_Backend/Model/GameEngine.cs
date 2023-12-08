@@ -1,9 +1,9 @@
-﻿using Ludo.Model.Interfaces;
+﻿using Ludo_Backend.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ludo.Model
+namespace Ludo_Backend.Model
 {
     public class GameEngine : IGameEngine
     {
@@ -78,7 +78,7 @@ namespace Ludo.Model
                     return player;
                 }
             }
-            
+
             return null;
         }
     }
