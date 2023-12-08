@@ -128,22 +128,14 @@
   <ItemGroup>
     <None Include="App\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\lobbyText.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\startingPageBackground.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\blueCircle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\yellowCircle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\greenCircle.png" />
-    <Resource Include="Images\redCircle.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\boardBackground.jpg" />
@@ -168,6 +160,15 @@
       <Project>{11e2a2ea-5f68-4ed4-bf77-f7eac9167184}</Project>
       <Name>Ludo_Backend</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bluePlayer.png" />
+    <Resource Include="Images\greenPlayer.png" />
+    <Resource Include="Images\redPlayer.png" />
+    <Resource Include="Images\yellowPlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\lobbyBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
