@@ -1,9 +1,9 @@
-﻿using Ludo_Backend.Model.Interfaces;
+﻿using Ludo_Backend.Functionaity.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ludo_Backend.Model
+namespace Ludo_Backend.Functionaity
 {
     public class GameEngine : IGameEngine
     {
@@ -14,10 +14,12 @@ namespace Ludo_Backend.Model
 
         public List<Player> Players { get; set; }
         public Player CurrentPlayerTurn { get; set; }
+        public List<Tile> Tiles { get; }
 
         public GameEngine(string[] playersNames)
         {
             InitializeGame(playersNames);
+            Tiles = board.Tiles;
         }
 
         private void InitializeGame(string[] playersNames)

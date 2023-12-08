@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using Ludo_Backend.Model;
-using Ludo_Backend.Model.Interfaces;
+using Ludo_Backend.Functionaity;
+using Ludo_Backend.Functionaity.Interfaces;
 
 namespace LudoTesting
 {

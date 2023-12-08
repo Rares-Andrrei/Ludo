@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Ludo.Service;
+using System.Windows;
 
 namespace Ludo
 {
@@ -7,8 +8,9 @@ namespace Ludo
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(NavigationService navigationService)
         {
+            DataContext = navigationService;
             InitializeComponent();
         }
     }

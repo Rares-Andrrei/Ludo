@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ludo_Backend.Model
+namespace Ludo_Backend.Functionaity
 {
     public class Player
     {
