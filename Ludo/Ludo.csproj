@@ -76,7 +76,6 @@
     <Compile Include="Service\ServiceCollection.cs" />
     <Compile Include="ViewModels\AddPlayerModel.cs" />
     <Compile Include="ViewModels\AddPlayerObserver.cs" />
-    <Compile Include="ViewModels\AddPlayerView.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

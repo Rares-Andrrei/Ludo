@@ -14,14 +14,10 @@ namespace Ludo.ViewModels
         List<IObserver> _observers=new List<IObserver>();
       
        
-        public void AddPlayer(Player player)
-        {
-
-            Notify(player);
-        }
+       
      
-       public void Notify(Player player)
-        {
+       public void Notify(ISubject subject)
+        { var player= subject as Player;
             foreach(var observer in _observers)
             {
                 observer.Update(player);
