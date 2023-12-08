@@ -9,7 +9,10 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -21,19 +24,24 @@
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="LOBBY" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="\Images\lobbyBackground.jpg"/>
+        </Grid.Background>
 
-        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"/>
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3" Background="#f9fadc" CornerRadius="30"/>
 
-        <Image Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
-        <Image Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
-        <Image Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
-        <Image Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="60" Width="60" Margin="240,30,0,30"/>
+        <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Source="\Images\lobbyText.png" Height="100"/>
 
-        <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60" Width="250" FontSize="20" FontWeight="Bold" Margin="42,60,0,60">Play</Button>
+        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" />
+        <TextBox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
 
+        <Image Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="100" Width="100" Source="\Images\bluePlayer.png"/>
+        <Image Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="100" Width="100" Source="\Images\yellowPlayer.png"/>
+        <Image Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="100" Width="100" Source="\Images\redPlayer.png"/>
+        <Image Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="100" Width="100" Source="\Images\greenPlayer.png"/>
+
+        <Button Grid.Row="5" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60" Width="250" FontSize="20" FontWeight="Bold" Margin="42,60,0,60">Play</Button>
     </Grid>
 </UserControl>
