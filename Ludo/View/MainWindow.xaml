@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sv="clr-namespace:Ludo.Service"
         xmlns:local="clr-namespace:Ludo.View"
         mc:Ignorable="d"
         Title="PURRDO"
         Height="900" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="\Images\logo.jpeg">
-    <Grid>
-        <local:BoardPage />
-        <!--<local:StartingPage />-->
-    </Grid>
+   
+        <UserControl Content="{Binding CurrentView}"/>
+
 </Window>

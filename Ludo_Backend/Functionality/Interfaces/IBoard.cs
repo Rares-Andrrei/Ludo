@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ludo_Backend.Model.Interfaces
+namespace Ludo_Backend.Functionaity.Interfaces
 {
     public interface IBoard
     {

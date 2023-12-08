@@ -1,9 +1,7 @@
-﻿using Ludo_Backend.Model;
-
-namespace Ludo.Service
+﻿namespace Ludo.Service
 {
     public interface IObserver
     {
-        void Update(Player player);
+        void Update(ISubject subject);
     }
 }

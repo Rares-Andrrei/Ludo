@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ludo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,9 @@ namespace Ludo.View
     /// </summary>
     public partial class StartingPage : UserControl
     {
-        public StartingPage()
+        public StartingPage(StartingPageVM startingPageVM)
         {
+            DataContext = startingPageVM;
             InitializeComponent();
         }
     }

@@ -3,9 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Ludo.ViewModels"
              xmlns:local="clr-namespace:Ludo.View"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1000">
+    
+    <UserControl.DataContext>
+        <vm:BoardVM/>
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -70,47 +76,47 @@
         <Image Grid.Row="10" Grid.Column="12" Grid.RowSpan="6" Grid.ColumnSpan="6" Source="\Images\greenBase.png" Stretch="Fill"/>
 
         <!--pioni baza albastra-->
-        <Image Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="8,7,29,19" />
-        <Image Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="29,7,9,19" />
-        <Image Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="13,28,33,8" />
-        <Image Grid.Row="4" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="29,23,9,3" />
+        <Image Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="8,7,29,19" Source="{Binding BlueBase[0]}"/>
+        <Image Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="29,7,9,19" Source="{Binding BlueBase[1]}"/>
+        <Image Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="13,28,33,8" Source="{Binding BlueBase[2]}"/>
+        <Image Grid.Row="4" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="29,23,9,3" Source="{Binding BlueBase[3]}"/>
 
         <!--pioni baza galbena-->
-        <Image Grid.Row="2" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,7,30,19"/>
-        <Image Grid.Row="2" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,7,8,19"/>
-        <Image Grid.Row="4" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,23,30,3"/>
-        <Image Grid.Row="4" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,23,8,3"/>
+        <Image Grid.Row="2" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,7,30,19" Source="{Binding YellowBase[0]}"/>
+        <Image Grid.Row="2" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,7,8,19" Source="{Binding YellowBase[1]}"/>
+        <Image Grid.Row="4" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,23,30,3" Source="{Binding YellowBase[2]}"/>
+        <Image Grid.Row="4" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,23,8,3" Source="{Binding YellowBase[3]}"/>
 
         <!--pioni baza rosie-->
-        <Image Grid.Row="11" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,10,29,16"/>
-        <Image Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,26,29,0"/>
-        <Image Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="30,10,8,16"/>
-        <Image Grid.Row="13" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="30,26,8,0"/>
+        <Image Grid.Row="11" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,10,29,16" Source="{Binding RedBase[0]}"/>
+        <Image Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,26,29,0" Source="{Binding RedBase[1]}"/>
+        <Image Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="30,10,8,16" Source="{Binding RedBase[2]}"/>
+        <Image Grid.Row="13" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="30,26,8,0" Source="{Binding RedBase[3]}"/>
 
         <!--piopioni baza verde-->
-        <Image Grid.Row="11" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,10,30,16"/>
-        <Image Grid.Row="11" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,10,8,16"/>
-        <Image Grid.Row="13" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,26,30,0"/>
-        <Image Grid.Row="13" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,26,8,0"/>
+        <Image Grid.Row="11" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,10,30,16" Source="{Binding GreenBase[0]}"/>
+        <Image Grid.Row="11" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,10,8,16" Source="{Binding GreenBase[1]}"/>
+        <Image Grid.Row="13" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,26,30,0" Source="{Binding GreenBase[2]}"/>
+        <Image Grid.Row="13" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,26,8,0" Source="{Binding GreenBase[3]}"/>
 
         <!--centru-->
         <Image Grid.Row="7" Grid.Column="9" Grid.RowSpan="3" Grid.ColumnSpan="3" Source="\Images\centerBase.jpg" Stretch="Fill"/>
         
         <!--pioni adusi la final-->
-        <Label Grid.Row="7" Grid.Column="10" Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <Label Grid.Row="8" Grid.Column="11" Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <Label Grid.Row="9" Grid.Column="10" Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <Label Grid.Row="8" Grid.Column="9" Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <Label Grid.Row="7" Grid.Column="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding YellowPlayerScore}"/>
+        <Label Grid.Row="8" Grid.Column="11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding GreenPlayerScore}"/>
+        <Label Grid.Row="9" Grid.Column="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding RedPlayerScore}"/>
+        <Label Grid.Row="8" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding BluePlayerScore}"/>
 
         <!--pozitii start-->
         <Rectangle Grid.Row="7" Grid.Column="4" Fill="#0766ad"/>
-        <Image Grid.Row="7" Grid.Column="4" Height="25" Width="25"/>
+        <Image Grid.Row="7" Grid.Column="4" Height="25" Width="25" Source="{Binding Tiles[0]}"/>
         <Rectangle Grid.Row="2" Grid.Column="11" Fill="#f4ce4f"/>
-        <Image Grid.Row="2" Grid.Column="11" Height="25" Width="25"/>
+        <Image Grid.Row="2" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[13]}"/>
         <Rectangle Grid.Row="14" Grid.Column="9" Fill="#f7454f"/>
-        <Image Grid.Row="14" Grid.Column="9" Height="25" Width="25"/>
+        <Image Grid.Row="14" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[26]}"/>
         <Rectangle Grid.Row="9" Grid.Column="16" Fill="#008170"/>
-        <Image Grid.Row="9" Grid.Column="16" Height="25" Width="25"/>
+        <Image Grid.Row="9" Grid.Column="16" Height="25" Width="25" Source="{Binding Tiles[39]}"/>
 
         <!--drumuri catre centru-->
         <!--albastru-->
@@ -214,67 +220,68 @@
         <Border Grid.Row="9" Grid.Column="3" BorderBrush="Black" BorderThickness="1"/>
         <Border Grid.Row="8" Grid.Column="3" BorderBrush="Black" BorderThickness="1"/>
         <Border Grid.Row="7" Grid.Column="3" BorderBrush="Black" BorderThickness="1"/>
-        <Image Grid.Row="7" Grid.Column="5" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="6" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="7" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="8" Height="25" Width="25"/>
-        <Image Grid.Row="6" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="5" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="4" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="3" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="2" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="1" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="1" Grid.Column="10" Height="25" Width="25"/>
-        <Image Grid.Row="1" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="3" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="4" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="5" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="6" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="12" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="13" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="14" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="15" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="16" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="17" Height="25" Width="25"/>
-        <Image Grid.Row="8" Grid.Column="17" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="17" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="15" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="14" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="13" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="12" Height="25" Width="25"/>
-        <Image Grid.Row="10" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="11" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="12" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="13" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="14" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="15" Grid.Column="11" Height="25" Width="25"/>
-        <Image Grid.Row="15" Grid.Column="10" Height="25" Width="25"/>
-        <Image Grid.Row="15" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="13" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="12" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="11" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="10" Grid.Column="9" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="8" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="7" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="6" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="5" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="4" Height="25" Width="25"/>
-        <Image Grid.Row="9" Grid.Column="3" Height="25" Width="25"/>
-        <Image Grid.Row="8" Grid.Column="3" Height="25" Width="25"/>
-        <Image Grid.Row="7" Grid.Column="3" Height="25" Width="25"/>
+        
+        <Image Grid.Row="7" Grid.Column="5" Height="25" Width="25" Source="{Binding Tiles[1]}"/>
+        <Image Grid.Row="7" Grid.Column="6" Height="25" Width="25" Source="{Binding Tiles[2]}"/>
+        <Image Grid.Row="7" Grid.Column="7" Height="25" Width="25" Source="{Binding Tiles[3]}"/>
+        <Image Grid.Row="7" Grid.Column="8" Height="25" Width="25" Source="{Binding Tiles[4]}"/>
+        <Image Grid.Row="6" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[5]}"/>
+        <Image Grid.Row="5" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[6]}"/>
+        <Image Grid.Row="4" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[7]}"/>
+        <Image Grid.Row="3" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[8]}"/>
+        <Image Grid.Row="2" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[9]}"/>
+        <Image Grid.Row="1" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[10]}"/>
+        <Image Grid.Row="1" Grid.Column="10" Height="25" Width="25" Source="{Binding Tiles[11]}"/>
+        <Image Grid.Row="1" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[12]}"/>
+        <Image Grid.Row="3" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[14]}"/>
+        <Image Grid.Row="4" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[15]}"/>
+        <Image Grid.Row="5" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[16]}"/>
+        <Image Grid.Row="6" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[17]}"/>
+        <Image Grid.Row="7" Grid.Column="12" Height="25" Width="25" Source="{Binding Tiles[18]}"/>
+        <Image Grid.Row="7" Grid.Column="13" Height="25" Width="25" Source="{Binding Tiles[19]}"/>
+        <Image Grid.Row="7" Grid.Column="14" Height="25" Width="25" Source="{Binding Tiles[20]}"/>
+        <Image Grid.Row="7" Grid.Column="15" Height="25" Width="25" Source="{Binding Tiles[21]}"/>
+        <Image Grid.Row="7" Grid.Column="16" Height="25" Width="25" Source="{Binding Tiles[22]}"/>
+        <Image Grid.Row="7" Grid.Column="17" Height="25" Width="25" Source="{Binding Tiles[23]}"/>
+        <Image Grid.Row="8" Grid.Column="17" Height="25" Width="25" Source="{Binding Tiles[24]}"/>
+        <Image Grid.Row="9" Grid.Column="17" Height="25" Width="25" Source="{Binding Tiles[25]}"/>
+        <Image Grid.Row="9" Grid.Column="15" Height="25" Width="25" Source="{Binding Tiles[27]}"/>
+        <Image Grid.Row="9" Grid.Column="14" Height="25" Width="25" Source="{Binding Tiles[28]}"/>
+        <Image Grid.Row="9" Grid.Column="13" Height="25" Width="25" Source="{Binding Tiles[29]}"/>
+        <Image Grid.Row="9" Grid.Column="12" Height="25" Width="25" Source="{Binding Tiles[30]}"/>
+        <Image Grid.Row="10" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[31]}"/>
+        <Image Grid.Row="11" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[32]}"/>
+        <Image Grid.Row="12" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[33]}"/>
+        <Image Grid.Row="13" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[34]}"/>
+        <Image Grid.Row="14" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[35]}"/>
+        <Image Grid.Row="15" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[36]}"/>
+        <Image Grid.Row="15" Grid.Column="10" Height="25" Width="25" Source="{Binding Tiles[37]}"/>
+        <Image Grid.Row="15" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[38]}"/>
+        <Image Grid.Row="13" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[40]}"/>
+        <Image Grid.Row="12" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[41]}"/>
+        <Image Grid.Row="11" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[42]}"/>
+        <Image Grid.Row="10" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[43]}"/>
+        <Image Grid.Row="9" Grid.Column="8" Height="25" Width="25" Source="{Binding Tiles[44]}"/>
+        <Image Grid.Row="9" Grid.Column="7" Height="25" Width="25" Source="{Binding Tiles[45]}"/>
+        <Image Grid.Row="9" Grid.Column="6" Height="25" Width="25" Source="{Binding Tiles[46]}"/>
+        <Image Grid.Row="9" Grid.Column="5" Height="25" Width="25" Source="{Binding Tiles[47]}"/>
+        <Image Grid.Row="9" Grid.Column="4" Height="25" Width="25" Source="{Binding Tiles[48]}"/>
+        <Image Grid.Row="9" Grid.Column="3" Height="25" Width="25" Source="{Binding Tiles[49]}"/>
+        <Image Grid.Row="8" Grid.Column="3" Height="25" Width="25" Source="{Binding Tiles[50]}"/>
+        <Image Grid.Row="7" Grid.Column="3" Height="25" Width="25" Source="{Binding Tiles[51]}"/>
 
         <!--nume jucatori-->
-        <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">Jucatorul albastru</Label>
-        <Label Grid.Row="0" Grid.Column="13" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">Jucatorul galben</Label>
-        <Label Grid.Row="16" Grid.Column="4" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">Jucatorul rosu</Label>
-        <Label Grid.Row="16" Grid.Column="13" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">Jucatorul verde</Label>
+        <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding BluePlayerName}"></Label>
+        <Label Grid.Row="0" Grid.Column="13" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding YellowPlayerName}"></Label>
+        <Label Grid.Row="16" Grid.Column="4" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding RedPlayerName}"></Label>
+        <Label Grid.Row="16" Grid.Column="13" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding GreenPlayerName}"></Label>
 
         <!--jucator curent-->
         <Label Content="Current Player: " Grid.Row="18" Grid.Column="1" Grid.ColumnSpan="5" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
-        <Label Grid.Row="18" Grid.Column="5" Grid.ColumnSpan="5" FontSize="20" VerticalAlignment="Center">Numele jucatorului</Label>
+        <Label Grid.Row="18" Grid.Column="5" Grid.ColumnSpan="5" FontSize="20" VerticalAlignment="Center" Content="{Binding CurrentPlayerTurn.Name}"></Label>
 
         <!--zar-->
-        <Image Grid.Row="17" Grid.Column="17" Grid.ColumnSpan="3" Grid.RowSpan="3" Source="\Images\one.png" Stretch="Fill" Cursor="Hand"/>
+        <Image Grid.Row="17" Grid.Column="17" Grid.ColumnSpan="3" Grid.RowSpan="3" Source="{Binding DiceImage}" Stretch="Fill" Cursor="Hand"/>
 
     </Grid>
 </UserControl>

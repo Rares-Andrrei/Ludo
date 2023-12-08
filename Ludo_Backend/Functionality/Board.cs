@@ -1,9 +1,9 @@
-﻿using Ludo_Backend.Model.Interfaces;
+﻿using Ludo_Backend.Functionaity.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ludo_Backend.Model
+namespace Ludo_Backend.Functionaity
 {
     public class Board : IBoard
     {

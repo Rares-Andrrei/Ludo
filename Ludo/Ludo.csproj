@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Service\NavigationService.cs" />
+    <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="ViewModels\BoardVM.cs" />
+    <Compile Include="ViewModels\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModels\StartingPageVM.cs" />
     <Compile Include="View\BoardPage.xaml.cs">
       <DependentUpon>BoardPage.xaml</DependentUpon>
     </Compile>
@@ -91,8 +96,6 @@
     <Compile Include="Service\IObserver.cs" />
     <Compile Include="Service\ISubject.cs" />
     <Compile Include="Service\ServiceCollection.cs" />
-    <Compile Include="ViewModels\AddPlayerModel.cs" />
-    <Compile Include="ViewModels\AddPlayerObserver.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -128,7 +131,12 @@
   <ItemGroup>
     <None Include="App\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\PawnImages\bluePawn.png" />
+    <Resource Include="Images\PawnImages\greenPawn.png" />
+    <Resource Include="Images\PawnImages\redPawn.png" />
+    <Resource Include="Images\PawnImages\yellowPawn.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\startingPageBackground.jpeg" />
   </ItemGroup>
