@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Ludo.Service;
+using System;
 using System.Windows;
 
 namespace Ludo
@@ -13,5 +9,12 @@ namespace Ludo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton(serviceCollection);
+            
+            base.OnStartup(e);
+        }
     }
 }
