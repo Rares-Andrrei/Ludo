@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ludo"
+        xmlns:vm="clr-namespace:Ludo.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:AddPlayerObserver/>
+    </Window.DataContext>
     <Grid>
-        
+        <TextBox x:Name="notifyPlayer" VerticalAlignment="Bottom" Text="{Binding player1.Name}" Width="400" Height="70"></TextBox>
+        <TextBox x:Name="inputPlayer" VerticalAlignment="Top"  Width="400" Height="70"></TextBox>
+        <Button x:Name="add" VerticalAlignment="Center" Width="400" Height="70" Click="Button_Click" >Add Player</Button>
     </Grid>
 </Window>
