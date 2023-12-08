@@ -55,6 +55,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\BoardPage.xaml.cs">
+      <DependentUpon>BoardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LeaderboardPage.xaml.cs">
+      <DependentUpon>LeaderboardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LobbyPage.xaml.cs">
+      <DependentUpon>LobbyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartingPage.xaml.cs">
+      <DependentUpon>StartingPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\BoardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LeaderboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LobbyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\StartingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -107,6 +135,43 @@
   <ItemGroup>
     <None Include="App\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\startingPageBackground.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\blueCircle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\yellowCircle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\greenCircle.png" />
+    <Resource Include="Images\redCircle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\boardBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\blueBase.png" />
+    <Resource Include="Images\greenBase.png" />
+    <Resource Include="Images\redBase.png" />
+    <Resource Include="Images\yellowBase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\centerBase.jpg" />
+    <Resource Include="Images\five.png" />
+    <Resource Include="Images\four.png" />
+    <Resource Include="Images\one.png" />
+    <Resource Include="Images\six.png" />
+    <Resource Include="Images\three.png" />
+    <Resource Include="Images\two.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
