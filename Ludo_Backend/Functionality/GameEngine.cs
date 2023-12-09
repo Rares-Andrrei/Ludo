@@ -16,15 +16,15 @@ namespace Ludo_Backend.Functionaity
         public Player CurrentPlayerTurn { get; set; }
         public List<Tile> Tiles { get; }
 
-        public GameEngine(string[] playersNames)
+        public GameEngine(List<string> playersNames)
         {
             InitializeGame(playersNames);
             Tiles = board.Tiles;
         }
 
-        private void InitializeGame(string[] playersNames)
+        private void InitializeGame(List<string> playersNames)
         {
-            byte playersNr = (byte)playersNames.Length;
+            byte playersNr = (byte)playersNames.Count;
 
             if (playersNr > MaximumPlayesNr || playersNr < 2)
             {

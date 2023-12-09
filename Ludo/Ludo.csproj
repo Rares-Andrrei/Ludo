@@ -59,6 +59,7 @@
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\BoardVM.cs" />
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModels\LobbyVM.cs" />
     <Compile Include="ViewModels\StartingPageVM.cs" />
     <Compile Include="View\BoardPage.xaml.cs">
       <DependentUpon>BoardPage.xaml</DependentUpon>

@@ -29,7 +29,7 @@ namespace Ludo.ViewModels
 
         private void Start(object parameter)
         {
-            navigationService.NavigateTo(serviceCollection.GetService<BoardPage>());
+            navigationService.NavigateTo(serviceCollection.GetService<LobbyPage>());
         }
     }
 }
