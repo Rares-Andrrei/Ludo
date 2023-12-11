@@ -7,31 +7,30 @@ namespace LudoTesting
     [TestClass]
     public class GameEngineUnitTests
     {
-        private string[] _playerNames;
-        private IGameEngine _gameEngine;
+        private List<string> _playerNames;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _playerNames = new string[] { "Rares", "Elena", "Catalin" };
+            _playerNames = new List<string> { "Rares", "Elena", "Catalin" };
         }
 
         [TestMethod]
         public void Cosntructor_CorrectInitialization_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            _gameEngine.Players.Count.Should().Be(3);
+            gameEngine.Players.Count.Should().Be(3);
         }
 
         [TestMethod]
         public void RollDice_ReturnValueBetween1And6_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
             for (int i = 0; i < 10; i++)
             {
-                byte value = _gameEngine.RollDice();
+                byte value = gameEngine.RollDice();
 
                 value.Should().BeInRange(1, 6);
             }
@@ -40,14 +39,14 @@ namespace LudoTesting
         [TestMethod]
         public void RollDice_ReturnRandomValues_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
             byte distinct = 0;
 
             for (int i = 0; i < 8; i++)
             {
-                byte value1 = _gameEngine.RollDice();
-                byte value2 = _gameEngine.RollDice();
+                byte value1 = gameEngine.RollDice();
+                byte value2 = gameEngine.RollDice();
                 if (value1 != value2)
                 {
                     distinct++;
@@ -59,34 +58,34 @@ namespace LudoTesting
         [TestMethod]
         public void CurrentPlayerTurn_ReturnTheCurrentPLayer_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            Player player = _gameEngine.CurrentPlayerTurn;
+            Player player = gameEngine.CurrentPlayerTurn;
 
-            player.Should().Be(_gameEngine.Players[0]);
+            player.Should().Be(gameEngine.Players[0]);
         }
 
         [TestMethod]
         public void NextPlayerTurn_ReturnTheNextPlayer_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            _gameEngine.FinishedTurn();
+            gameEngine.FinishedTurn();
 
-            Player player = _gameEngine.CurrentPlayerTurn;
+            Player player = gameEngine.CurrentPlayerTurn;
 
-            player.Should().Be(_gameEngine.Players[1]);
+            player.Should().Be(gameEngine.Players[1]);
         }
 
         [TestMethod]
         public void CurrentPlayerTurn_CheckIfTheCurrentPLayerWasUpdated_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            _gameEngine.FinishedTurn();
-            Player player = _gameEngine.CurrentPlayerTurn;
+            gameEngine.FinishedTurn();
+            Player player = gameEngine.CurrentPlayerTurn;
 
-            player.Should().Be(_gameEngine.Players[1]);
+            player.Should().Be(gameEngine.Players[1]);
         }
 
 
@@ -95,30 +94,30 @@ namespace LudoTesting
         {
             Player player;
 
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            player = _gameEngine.CurrentPlayerTurn;
-            player.Should().Be(_gameEngine.Players[0]);
+            player = gameEngine.CurrentPlayerTurn;
+            player.Should().Be(gameEngine.Players[0]);
 
-            _gameEngine.FinishedTurn();
-            player = _gameEngine.CurrentPlayerTurn;
-            player.Should().Be(_gameEngine.Players[1]);
+           gameEngine.FinishedTurn();
+            player = gameEngine.CurrentPlayerTurn;
+            player.Should().Be(gameEngine.Players[1]);
 
-            _gameEngine.FinishedTurn();
-            player = _gameEngine.CurrentPlayerTurn;
-            player.Should().Be(_gameEngine.Players[2]);
+            gameEngine.FinishedTurn();
+            player = gameEngine.CurrentPlayerTurn;
+            player.Should().Be(gameEngine.Players[2]);
 
-            _gameEngine.FinishedTurn();
-            player = _gameEngine.CurrentPlayerTurn;
-            player.Should().Be(_gameEngine.Players[0]);
+            gameEngine.FinishedTurn();
+            player = gameEngine.CurrentPlayerTurn;
+            player.Should().Be(gameEngine.Players[0]);
         }
 
         [TestMethod]
         public void CheckWinState_CheckIfTheWinStateIsCorrect_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            Player player = _gameEngine.CheckWinState();
+            Player player = gameEngine.CheckWinState();
 
             player.Should().BeNull();
         }
@@ -126,16 +125,16 @@ namespace LudoTesting
         [TestMethod]
         public void ReleasePawnFromBase_CheckIfThePawnIsCorrectlyReleased_WhenCalled()
         {
-            _gameEngine = new GameEngine(_playerNames);
+            var gameEngine = new GameEngine(_playerNames);
 
-            foreach (var pawn in _gameEngine.Players[0].Pawns)
+            foreach (var pawn in gameEngine.Players[0].Pawns)
             {
                 pawn.State = Pawn.PawnState.Finished;
             }
 
-            Player winner = _gameEngine.CheckWinState();
+            Player winner = gameEngine.CheckWinState();
 
-            winner.Should().Be(_gameEngine.Players[0]);
+            winner.Should().Be(gameEngine.Players[0]);
         }
     }
 
