@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Ludo_Backend.Observer;
+using System.Collections.Generic;
 
 namespace Ludo_Backend.Functionaity.Interfaces
 {
-    public interface IGameEngine
+    public interface IGameEngine : IGameEngineSubject
     {
         List<Tile> Tiles { get; }
         List<Player> Players { get; set; }
@@ -11,6 +12,7 @@ namespace Ludo_Backend.Functionaity.Interfaces
         void FinishedTurn();
         bool MovePawn(Pawn pawn, byte steps);
         bool CanMovePawn(Pawn pawn, byte steps);
+        List<Pawn> AvailablePawnsToMoveForCurrentPlayer();
         Player CheckWinState();
         bool ReleasePawnFromBase(Pawn pawn);
         byte RollDice();

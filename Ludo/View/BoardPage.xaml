@@ -114,7 +114,9 @@
         <Rectangle Grid.Row="2" Grid.Column="11" Fill="#f4ce4f"/>
         <Image Grid.Row="2" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[13]}"/>
         <Rectangle Grid.Row="14" Grid.Column="9" Fill="#f7454f"/>
-        <Image Grid.Row="14" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[26]}"/>
+        <Button Grid.Row="14" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[26]}">
+            <Image Height="25" Width="25" Source="{Binding Tiles[26]}"/>
+        </Button>
         <Rectangle Grid.Row="9" Grid.Column="16" Fill="#008170"/>
         <Image Grid.Row="9" Grid.Column="16" Height="25" Width="25" Source="{Binding Tiles[39]}"/>
 
@@ -281,7 +283,12 @@
         <Label Grid.Row="18" Grid.Column="5" Grid.ColumnSpan="5" FontSize="20" VerticalAlignment="Center" Content="{Binding CurrentPlayerTurn.Name}"></Label>
 
         <!--zar-->
-        <Image Grid.Row="17" Grid.Column="17" Grid.ColumnSpan="3" Grid.RowSpan="3" Source="{Binding DiceImage}" Stretch="Fill" Cursor="Hand"/>
+        <Border BorderThickness="3" BorderBrush="Red" Grid.Row="17" Grid.Column="17" Grid.ColumnSpan="3" Grid.RowSpan="3" CornerRadius="10">
+            <Button Command="{Binding RollDiceCommand}">
+                <Image Source="{Binding DiceImage}" Stretch="Fill"/>
+            </Button>
+        </Border>
+
 
     </Grid>
 </UserControl>

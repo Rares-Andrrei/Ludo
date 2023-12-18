@@ -1,4 +1,5 @@
 ﻿using Ludo_Backend.Functionaity.Interfaces;
+using Ludo_Backend.Observer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Ludo_Backend.Functionaity
     {
         private const byte MaximumPlayesNr = 4;
 
+        private byte _diceValue;
+        private List<IGameEngineOberver> observers;
         private readonly Random random = new Random();
         private Board board;
 
@@ -18,6 +21,7 @@ namespace Ludo_Backend.Functionaity
 
         public GameEngine(List<string> playersNames)
         {
+            observers = new List<IGameEngineOberver>();
             InitializeGame(playersNames);
             Tiles = board.Tiles;
         }
@@ -52,8 +56,10 @@ namespace Ludo_Backend.Functionaity
         }
 
         public byte RollDice()
-        {
-            return (byte)random.Next(1, 7);
+        {            
+            _diceValue = (byte)random.Next(1, 7);
+            observers.ForEach(observer => observer.NotifyDiceRolled(_diceValue));
+            return _diceValue;
         }
 
         public bool MovePawn(Pawn pawn, byte steps)
@@ -82,6 +88,30 @@ namespace Ludo_Backend.Functionaity
             }
 
             return null;
+        }
+
+        public void Attach(IGameEngineOberver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void Detach(IGameEngineOberver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public List<Pawn> AvailablePawnsToMoveForCurrentPlayer()
+        {
+            List<Pawn> pawns = new List<Pawn>();
+            CurrentPlayerTurn.Pawns.ForEach(pawn =>
+            {
+                if (CanMovePawn(pawn, _diceValue))
+                {
+                    pawns.Add(pawn);
+                }
+            });
+
+            return pawns;
         }
     }
 }
