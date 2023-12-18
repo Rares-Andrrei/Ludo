@@ -360,6 +360,38 @@ namespace Ludo.ViewModels
         {
 
         }
+
+        private ICommand _pawnBaseSelected;
+        public ICommand PawnBaseSelectedCommand
+        {
+            get
+            {
+                if (_pawnBaseSelected == null)
+                    _pawnBaseSelected = new RelayCommand(PawnBaseSelected);
+                return _pawnBaseSelected;
+            }
+        }
+
+        private void PawnBaseSelected(object parameter)
+        {
+
+        }
+
+        private ICommand _pawnPathSelected;
+        public ICommand PawnPathSelectedCommand
+        {
+            get
+            {
+                if (_pawnPathSelected == null)
+                    _pawnPathSelected = new RelayCommand(PawnPathSelected);
+                return _pawnPathSelected;
+            }
+        }
+
+        private void PawnPathSelected(object parameter)
+        {
+
+        }
         #endregion
 
     }
