@@ -172,13 +172,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\bluePlayer.png" />
-    <Resource Include="Images\greenPlayer.png" />
-    <Resource Include="Images\redPlayer.png" />
-    <Resource Include="Images\yellowPlayer.png" />
+    <Resource Include="Images\lobbyBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\lobbyBackground.jpg" />
+    <Resource Include="Images\lobbyPlayers.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
