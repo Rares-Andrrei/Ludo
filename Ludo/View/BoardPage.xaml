@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Ludo.View"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1000">
-    
+
     <UserControl.DataContext>
         <vm:BoardVM/>
     </UserControl.DataContext>
@@ -76,32 +76,64 @@
         <Image Grid.Row="10" Grid.Column="12" Grid.RowSpan="6" Grid.ColumnSpan="6" Source="\Images\greenBase.png" Stretch="Fill"/>
 
         <!--pioni baza albastra-->
-        <Image Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="8,7,29,19" Source="{Binding BlueBase[0]}"/>
-        <Image Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="29,7,9,19" Source="{Binding BlueBase[1]}"/>
-        <Image Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="13,28,33,8" Source="{Binding BlueBase[2]}"/>
-        <Image Grid.Row="4" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50" Margin="29,23,9,3" Source="{Binding BlueBase[3]}"/>
+        <Button Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="8,7,29,19" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding BlueBase[0]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image  Width="50" Height="50" Source="{Binding BlueBase[0]}"/>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,7,9,19" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding BlueBase[1]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image  Width="50" Height="50" Source="{Binding BlueBase[1]}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="13,28,33,8" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding BlueBase[2]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding BlueBase[2]}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="33,28,13,8" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding BlueBase[3]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding BlueBase[3]}"/>
+        </Button>
 
         <!--pioni baza galbena-->
-        <Image Grid.Row="2" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,7,30,19" Source="{Binding YellowBase[0]}"/>
-        <Image Grid.Row="2" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,7,8,19" Source="{Binding YellowBase[1]}"/>
-        <Image Grid.Row="4" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,23,30,3" Source="{Binding YellowBase[2]}"/>
-        <Image Grid.Row="4" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,23,8,3" Source="{Binding YellowBase[3]}"/>
+        <Button Grid.Row="2" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,7,30,19" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding YellowBase[0]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding YellowBase[0]}"/>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,7,8,19" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding YellowBase[1]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding YellowBase[1]}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,23,30,3" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding YellowBase[2]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding YellowBase[2]}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,23,8,3" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding YellowBase[3]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding YellowBase[3]}"/>
+        </Button>
 
         <!--pioni baza rosie-->
-        <Image Grid.Row="11" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,10,29,16" Source="{Binding RedBase[0]}"/>
-        <Image Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,26,29,0" Source="{Binding RedBase[1]}"/>
-        <Image Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="30,10,8,16" Source="{Binding RedBase[2]}"/>
-        <Image Grid.Row="13" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="30,26,8,0" Source="{Binding RedBase[3]}"/>
+        <Button Grid.Row="11" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,10,29,16" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding RedBase[0]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding RedBase[0]}"/>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,26,29,0" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding RedBase[1]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding RedBase[1]}"/>
+        </Button>
+        <Button Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="30,10,8,16" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding RedBase[2]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding RedBase[2]}"/>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="30,26,8,0" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding RedBase[3]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding RedBase[3]}"/>
+        </Button>
 
         <!--piopioni baza verde-->
-        <Image Grid.Row="11" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,10,30,16" Source="{Binding GreenBase[0]}"/>
-        <Image Grid.Row="11" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,10,8,16" Source="{Binding GreenBase[1]}"/>
-        <Image Grid.Row="13" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="8,26,30,0" Source="{Binding GreenBase[2]}"/>
-        <Image Grid.Row="13" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="50" Height="50"  Margin="29,26,8,0" Source="{Binding GreenBase[3]}"/>
+        <Button Grid.Row="11" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,10,30,16" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding GreenBase[0]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding GreenBase[0]}"/>
+        </Button>
+        <Button Grid.Row="11" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="29,10,8,16" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding GreenBase[1]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding GreenBase[1]}"/>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,26,30,0" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding GreenBase[2]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding GreenBase[2]}"/>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,26,8,0" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding GreenBase[3]}"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+            <Image Width="50" Height="50" Source="{Binding GreenBase[3]}"/>
+        </Button>
 
         <!--centru-->
         <Image Grid.Row="7" Grid.Column="9" Grid.RowSpan="3" Grid.ColumnSpan="3" Source="\Images\centerBase.jpg" Stretch="Fill"/>
-        
+
         <!--pioni adusi la final-->
         <Label Grid.Row="7" Grid.Column="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding YellowPlayerScore}"/>
         <Label Grid.Row="8" Grid.Column="11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding GreenPlayerScore}"/>
@@ -110,15 +142,24 @@
 
         <!--pozitii start-->
         <Rectangle Grid.Row="7" Grid.Column="4" Fill="#0766ad"/>
-        <Image Grid.Row="7" Grid.Column="4" Height="25" Width="25" Source="{Binding Tiles[0]}"/>
+        <Button Grid.Row="7" Grid.Column="4" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[0]}"  Style="{x:Null}" Background="Transparent" >
+            <Image Height="25" Width="25" Source="{Binding Tiles[0]}"/>
+        </Button>
+
         <Rectangle Grid.Row="2" Grid.Column="11" Fill="#f4ce4f"/>
-        <Image Grid.Row="2" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[13]}"/>
+        <Button Grid.Row="2" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[13]}"  Style="{x:Null}" Background="Transparent" >
+            <Image Height="25" Width="25" Source="{Binding Tiles[13]}"/>
+        </Button>
+
         <Rectangle Grid.Row="14" Grid.Column="9" Fill="#f7454f"/>
-        <Button Grid.Row="14" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[26]}">
+        <Button Grid.Row="14" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[26]}"  Style="{x:Null}" Background="Transparent" >
             <Image Height="25" Width="25" Source="{Binding Tiles[26]}"/>
         </Button>
+
         <Rectangle Grid.Row="9" Grid.Column="16" Fill="#008170"/>
-        <Image Grid.Row="9" Grid.Column="16" Height="25" Width="25" Source="{Binding Tiles[39]}"/>
+        <Button Grid.Row="9" Grid.Column="16" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[39]}" Style="{x:Null}" Background="Transparent" >
+            <Image Height="25" Width="25" Source="{Binding Tiles[39]}"/>
+        </Button>
 
         <!--drumuri catre centru-->
         <!--albastru-->
@@ -127,7 +168,7 @@
         <Rectangle Grid.Row="8" Grid.Column="6" Fill="#0766ad"/>
         <Rectangle Grid.Row="8" Grid.Column="7" Fill="#0766ad"/>
         <Rectangle Grid.Row="8" Grid.Column="8" Fill="#0766ad"/>
-            
+
         <Image Grid.Row="8" Grid.Column="4" Height="25" Width="25"/>
         <Image Grid.Row="8" Grid.Column="5" Height="25" Width="25"/>
         <Image Grid.Row="8" Grid.Column="6" Height="25" Width="25"/>
@@ -140,7 +181,7 @@
         <Rectangle Grid.Row="4" Grid.Column="10" Fill="#f4ce4f"/>
         <Rectangle Grid.Row="5" Grid.Column="10" Fill="#f4ce4f"/>
         <Rectangle Grid.Row="6" Grid.Column="10" Fill="#f4ce4f"/>
-            
+
         <Image Grid.Row="2" Grid.Column="10" Height="25" Width="25"/>
         <Image Grid.Row="3" Grid.Column="10" Height="25" Width="25"/>
         <Image Grid.Row="4" Grid.Column="10" Height="25" Width="25"/>
@@ -153,20 +194,20 @@
         <Rectangle Grid.Row="8" Grid.Column="14" Fill="#008170"/>
         <Rectangle Grid.Row="8" Grid.Column="13" Fill="#008170"/>
         <Rectangle Grid.Row="8" Grid.Column="12" Fill="#008170"/>
-        
+
         <Image Grid.Row="8" Grid.Column="16" Height="25" Width="25"/>
         <Image Grid.Row="8" Grid.Column="15" Height="25" Width="25"/>
         <Image Grid.Row="8" Grid.Column="14" Height="25" Width="25"/>
         <Image Grid.Row="8" Grid.Column="13" Height="25" Width="25"/>
         <Image Grid.Row="8" Grid.Column="12" Height="25" Width="25"/>
-        
+
         <!--rosu-->
         <Rectangle Grid.Row="14" Grid.Column="10" Fill="#f7454f"/>
         <Rectangle Grid.Row="13" Grid.Column="10" Fill="#f7454f"/>
         <Rectangle Grid.Row="12" Grid.Column="10" Fill="#f7454f"/>
         <Rectangle Grid.Row="11" Grid.Column="10" Fill="#f7454f"/>
         <Rectangle Grid.Row="10" Grid.Column="10" Fill="#f7454f"/>
-        
+
         <Image Grid.Row="14" Grid.Column="10" Height="25" Width="25"/>
         <Image Grid.Row="13" Grid.Column="10" Height="25" Width="25"/>
         <Image Grid.Row="12" Grid.Column="10" Height="25" Width="25"/>
@@ -222,55 +263,151 @@
         <Border Grid.Row="9" Grid.Column="3" BorderBrush="Black" BorderThickness="1"/>
         <Border Grid.Row="8" Grid.Column="3" BorderBrush="Black" BorderThickness="1"/>
         <Border Grid.Row="7" Grid.Column="3" BorderBrush="Black" BorderThickness="1"/>
-        
-        <Image Grid.Row="7" Grid.Column="5" Height="25" Width="25" Source="{Binding Tiles[1]}"/>
-        <Image Grid.Row="7" Grid.Column="6" Height="25" Width="25" Source="{Binding Tiles[2]}"/>
-        <Image Grid.Row="7" Grid.Column="7" Height="25" Width="25" Source="{Binding Tiles[3]}"/>
-        <Image Grid.Row="7" Grid.Column="8" Height="25" Width="25" Source="{Binding Tiles[4]}"/>
-        <Image Grid.Row="6" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[5]}"/>
-        <Image Grid.Row="5" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[6]}"/>
-        <Image Grid.Row="4" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[7]}"/>
-        <Image Grid.Row="3" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[8]}"/>
-        <Image Grid.Row="2" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[9]}"/>
-        <Image Grid.Row="1" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[10]}"/>
-        <Image Grid.Row="1" Grid.Column="10" Height="25" Width="25" Source="{Binding Tiles[11]}"/>
-        <Image Grid.Row="1" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[12]}"/>
-        <Image Grid.Row="3" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[14]}"/>
-        <Image Grid.Row="4" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[15]}"/>
-        <Image Grid.Row="5" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[16]}"/>
-        <Image Grid.Row="6" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[17]}"/>
-        <Image Grid.Row="7" Grid.Column="12" Height="25" Width="25" Source="{Binding Tiles[18]}"/>
-        <Image Grid.Row="7" Grid.Column="13" Height="25" Width="25" Source="{Binding Tiles[19]}"/>
-        <Image Grid.Row="7" Grid.Column="14" Height="25" Width="25" Source="{Binding Tiles[20]}"/>
-        <Image Grid.Row="7" Grid.Column="15" Height="25" Width="25" Source="{Binding Tiles[21]}"/>
-        <Image Grid.Row="7" Grid.Column="16" Height="25" Width="25" Source="{Binding Tiles[22]}"/>
-        <Image Grid.Row="7" Grid.Column="17" Height="25" Width="25" Source="{Binding Tiles[23]}"/>
-        <Image Grid.Row="8" Grid.Column="17" Height="25" Width="25" Source="{Binding Tiles[24]}"/>
-        <Image Grid.Row="9" Grid.Column="17" Height="25" Width="25" Source="{Binding Tiles[25]}"/>
-        <Image Grid.Row="9" Grid.Column="15" Height="25" Width="25" Source="{Binding Tiles[27]}"/>
-        <Image Grid.Row="9" Grid.Column="14" Height="25" Width="25" Source="{Binding Tiles[28]}"/>
-        <Image Grid.Row="9" Grid.Column="13" Height="25" Width="25" Source="{Binding Tiles[29]}"/>
-        <Image Grid.Row="9" Grid.Column="12" Height="25" Width="25" Source="{Binding Tiles[30]}"/>
-        <Image Grid.Row="10" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[31]}"/>
-        <Image Grid.Row="11" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[32]}"/>
-        <Image Grid.Row="12" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[33]}"/>
-        <Image Grid.Row="13" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[34]}"/>
-        <Image Grid.Row="14" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[35]}"/>
-        <Image Grid.Row="15" Grid.Column="11" Height="25" Width="25" Source="{Binding Tiles[36]}"/>
-        <Image Grid.Row="15" Grid.Column="10" Height="25" Width="25" Source="{Binding Tiles[37]}"/>
-        <Image Grid.Row="15" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[38]}"/>
-        <Image Grid.Row="13" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[40]}"/>
-        <Image Grid.Row="12" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[41]}"/>
-        <Image Grid.Row="11" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[42]}"/>
-        <Image Grid.Row="10" Grid.Column="9" Height="25" Width="25" Source="{Binding Tiles[43]}"/>
-        <Image Grid.Row="9" Grid.Column="8" Height="25" Width="25" Source="{Binding Tiles[44]}"/>
-        <Image Grid.Row="9" Grid.Column="7" Height="25" Width="25" Source="{Binding Tiles[45]}"/>
-        <Image Grid.Row="9" Grid.Column="6" Height="25" Width="25" Source="{Binding Tiles[46]}"/>
-        <Image Grid.Row="9" Grid.Column="5" Height="25" Width="25" Source="{Binding Tiles[47]}"/>
-        <Image Grid.Row="9" Grid.Column="4" Height="25" Width="25" Source="{Binding Tiles[48]}"/>
-        <Image Grid.Row="9" Grid.Column="3" Height="25" Width="25" Source="{Binding Tiles[49]}"/>
-        <Image Grid.Row="8" Grid.Column="3" Height="25" Width="25" Source="{Binding Tiles[50]}"/>
-        <Image Grid.Row="7" Grid.Column="3" Height="25" Width="25" Source="{Binding Tiles[51]}"/>
+
+        <Button Grid.Row="7" Grid.Column="5" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[1]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[1]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="6" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[2]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[2]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="7" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[3]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[3]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="8" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[4]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[4]}"/>
+        </Button>
+        <Button Grid.Row="6" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[5]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[5]}"/>
+        </Button>
+        <Button Grid.Row="5" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[6]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[6]}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[7]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[7]}"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[8]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[8]}"/>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[9]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[9]}"/>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[10]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[10]}"/>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="10" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[11]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[11]}"/>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[12]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[12]}"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[14]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[14]}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[15]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[15]}"/>
+        </Button>
+        <Button Grid.Row="5" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[16]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[16]}"/>
+        </Button>
+        <Button Grid.Row="6" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[17]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[17]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="12" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[18]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[18]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="13" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[19]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[19]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="14" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[20]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[20]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="15" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[21]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[21]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="16" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[22]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[22]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="17" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[23]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[23]}"/>
+        </Button>
+        <Button Grid.Row="8" Grid.Column="17" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[24]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[24]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="17" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[25]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[25]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="15" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[27]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[27]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="14" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[28]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[28]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="13" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[29]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[29]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="12" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[30]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[30]}"/>
+        </Button>
+        <Button Grid.Row="10" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[31]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[31]}"/>
+        </Button>
+        <Button Grid.Row="11" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[32]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[32]}"/>
+        </Button>
+        <Button Grid.Row="12" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[33]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[33]}"/>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[34]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[34]}"/>
+        </Button>
+        <Button Grid.Row="14" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[35]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[35]}"/>
+        </Button>
+        <Button Grid.Row="15" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[36]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[36]}"/>
+        </Button>
+        <Button Grid.Row="15" Grid.Column="10" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[37]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[37]}"/>
+        </Button>
+        <Button Grid.Row="15" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[38]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[38]}"/>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[40]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[40]}"/>
+        </Button>
+        <Button Grid.Row="12" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[41]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[41]}"/>
+        </Button>
+        <Button Grid.Row="11" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[42]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[42]}"/>
+        </Button>
+        <Button Grid.Row="10" Grid.Column="9" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[43]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[43]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="8" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[44]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[44]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="7" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[45]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[45]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="6" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[46]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[46]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="5" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[47]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[47]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="4" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[48]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[48]}"/>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="3" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[49]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[49]}"/>
+        </Button>
+        <Button Grid.Row="8" Grid.Column="3" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[50]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[50]}"/>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="3" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[51]}" Style="{x:Null}" Background="Transparent">
+            <Image  Height="25" Width="25" Source="{Binding Tiles[51]}"/>
+        </Button>
 
         <!--nume jucatori-->
         <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding BluePlayerName}"></Label>
