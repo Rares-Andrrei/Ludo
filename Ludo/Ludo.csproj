@@ -178,5 +178,11 @@
     <Resource Include="Images\DiceImages\three.png" />
     <Resource Include="Images\DiceImages\two.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PawnImages\blueHighlightedPawn.png" />
+    <Resource Include="Images\PawnImages\greenHighlightedPawn.png" />
+    <Resource Include="Images\PawnImages\redHighlightedPawn.png" />
+    <Resource Include="Images\PawnImages\yellowHighlightedPawn.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -56,7 +56,7 @@ namespace Ludo_Backend.Functionaity
         }
 
         public byte RollDice()
-        {            
+        {       
             _diceValue = (byte)random.Next(1, 7);
             observers.ForEach(observer => observer.NotifyDiceRolled(_diceValue));
             return _diceValue;

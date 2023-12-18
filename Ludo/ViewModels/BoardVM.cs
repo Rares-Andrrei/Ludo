@@ -1,6 +1,4 @@
-﻿using Ludo.Service;
-using Ludo.View;
-using Ludo.ViewModels.Commands;
+﻿using Ludo.ViewModels.Commands;
 using Ludo_Backend.Functionaity;
 using Ludo_Backend.Functionaity.Interfaces;
 using Ludo_Backend.Observer;
@@ -43,8 +41,17 @@ namespace Ludo.ViewModels
             }
         }
 
-
-        public List<string> RedBase { get; set; }
+        private ObservableCollection<string> _redBase;
+        public ObservableCollection<string> RedBase
+        {
+            get { return _redBase; }
+            set
+            {
+                _redBase = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> RedPath { get; set; }
         public byte RedPlayerScore { get; set; }
         private string _redPlayerName;
         public string RedPlayerName
@@ -57,7 +64,17 @@ namespace Ludo.ViewModels
             }
         }
 
-        public List<string> BlueBase { get; set; }
+        private ObservableCollection<string> _blueBase;
+        public ObservableCollection<string> BlueBase
+        {
+            get { return _blueBase; }
+            set
+            {
+                _blueBase = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> BluePath { get; set; }
         public byte BluePlayerScore { get; set; }
         private string _bluePlayerName;
         public string BluePlayerName
@@ -70,7 +87,17 @@ namespace Ludo.ViewModels
             }
         }
 
-        public List<string> GreenBase { get; set; }
+        private ObservableCollection<string> _greenBase;
+        public ObservableCollection<string> GreenBase
+        {
+            get { return _greenBase; }
+            set
+            {
+                _greenBase = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> GreenPath { get; set; }
         public byte GreenPlayerScore { get; set; }
         private string _greenPlayerName;
         public string GreenPlayerName
@@ -83,7 +110,17 @@ namespace Ludo.ViewModels
             }
         }
 
-        public List<string> YellowBase { get; set; }
+        private ObservableCollection<string> _yellowBase;
+        public ObservableCollection<string> YellowBase
+        {
+            get { return _yellowBase; }
+            set
+            {
+                _yellowBase = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> YellowPath { get; set; }
         public byte YellowPlayerScore { get; set; }
         private string _yellowPlayerName;
         public string YellowPlayerName
@@ -96,23 +133,29 @@ namespace Ludo.ViewModels
             }
         }
 
-        public BoardVM()
-        {
-            InitializeViewModel();
-        }
-
         private void InitializeViewModel()
         {
             Tiles = new ObservableCollection<string>(Enumerable.Repeat<string>(null, TilesNr).ToList());
-            RedBase = Enumerable.Repeat<string>("\\Images\\PawnImages\\redPawn.png", PawnsNr).ToList();
-            BlueBase = Enumerable.Repeat<string>("\\Images\\PawnImages\\bluePawn.png", PawnsNr).ToList();
-            GreenBase = Enumerable.Repeat<string>("\\Images\\PawnImages\\greenPawn.png", PawnsNr).ToList();
-            YellowBase = Enumerable.Repeat<string>("\\Images\\PawnImages\\yellowPawn.png", PawnsNr).ToList();
-
-            RedPlayerScore = 0;
-            BluePlayerScore = 0;
-            GreenPlayerScore = 0;
-            YellowPlayerScore = 0;
+            if (RedPlayerName != null)
+            {
+                RedBase = new ObservableCollection<string>(Enumerable.Repeat<string>("\\Images\\PawnImages\\redPawn.png", PawnsNr).ToList());
+                RedPlayerScore = 0;
+            }
+            if (BluePlayerName != null)
+            {
+                BlueBase = new ObservableCollection<string>(Enumerable.Repeat<string>("\\Images\\PawnImages\\bluePawn.png", PawnsNr).ToList());
+                BluePlayerScore = 0;
+            }
+            if (GreenPlayerName != null)
+            {
+                GreenBase = new ObservableCollection<string>(Enumerable.Repeat<string>("\\Images\\PawnImages\\greenPawn.png", PawnsNr).ToList());
+                GreenPlayerScore = 0;
+            }
+            if (YellowPlayerName != null)
+            {
+                YellowBase = new ObservableCollection<string>(Enumerable.Repeat<string>("\\Images\\PawnImages\\yellowPawn.png", PawnsNr).ToList());
+                YellowPlayerScore = 0;
+            }
 
             DiceImage = defaultDice;
         }
@@ -121,6 +164,7 @@ namespace Ludo.ViewModels
             _gameEngine = new GameEngine(players);
             _gameEngine.Attach(this);
             UpdatePlayerColors();
+            InitializeViewModel();
             NextPlayerTurn();
         }
         private void UpdatePlayerColors()
@@ -152,7 +196,7 @@ namespace Ludo.ViewModels
 
         private void ChangeDiceValue(byte diceValue)
         {
-            switch(diceValue)
+            switch (diceValue)
             {
                 case 1:
                     DiceImage = "\\Images\\DiceImages\\one.png";
@@ -177,13 +221,99 @@ namespace Ludo.ViewModels
                     break;
             }
         }
-        private void ShowAvailableMoves()
+        private void ShowAvailableMoves(byte diceValue)
         {
             List<Pawn> availablePawns = _gameEngine.AvailablePawnsToMoveForCurrentPlayer();
+
+            if (availablePawns.Count == 0)
+            {
+                _gameEngine.FinishedTurn();
+                NextPlayerTurn();
+                return;
+            }
+
             foreach (Pawn pawn in availablePawns)
             {
-                string imageName = $"{CurrentPlayerTurn.Color.ToString().ToLower()}HighlitedPawn.png";
-                Tiles[pawn.Position] = $"\\Images\\PawnImages\\imageName";
+                if (pawn.State == Pawn.PawnState.InPlay)
+                {
+                    string imageName = $"{CurrentPlayerTurn.Color.ToString().ToLower()}HighlitedPawn.png";
+                    Tiles[pawn.Position] = $"\\Images\\PawnImages\\imageName";
+                }
+                else if (pawn.State == Pawn.PawnState.AlmostFinished)
+                {
+                    HighlightAlmostFinishedAvailablePawns(CurrentPlayerTurn, pawn.Position);
+                }
+            }
+
+            if (diceValue == 6)
+            {
+                HighlightBaseAvailablePawns(CurrentPlayerTurn);
+            }
+
+
+        }
+
+        private void HighlightAlmostFinishedAvailablePawns(Player CurrentPlayerTurn, byte position)
+        {
+            if (CurrentPlayerTurn.Color == PlayerColor.Blue)
+            {
+                BluePath[position] = "\\Images\\PawnImages\\blueHighlightedPawn.png";
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Green)
+            {
+                GreenPath[position] = "\\Images\\PawnImages\\greenHighlightedPawn.png";
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Red)
+            {
+                RedPath[position] = "\\Images\\PawnImages\\redHighlightedPawn.png";
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Yellow)
+            {
+                YellowPath[position] = "\\Images\\PawnImages\\yellowHighlightedPawn.png";
+            }
+        }
+
+        private void HighlightBaseAvailablePawns(Player CurrentPlayerTurn)
+        {
+            if (CurrentPlayerTurn.Color == PlayerColor.Blue)
+            {
+                for (int i = 0; i < BlueBase.Count; i++)
+                {
+                    if (BlueBase[i] == "\\Images\\PawnImages\\bluePawn.png")
+                    {
+                        BlueBase[i] = "\\Images\\PawnImages\\blueHighlightedPawn.png";
+                    }
+                }
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Green)
+            {
+                for (int i = 0; i < GreenBase.Count; i++)
+                {
+                    if (GreenBase[i] == "\\Images\\PawnImages\\greenPawn.png")
+                    {
+                        GreenBase[i] = "\\Images\\PawnImages\\greenHighlightedPawn.png";
+                    }
+                }
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Red)
+            {
+                for (int i = 0; i < RedBase.Count; i++)
+                {
+                    if (RedBase[i] == "\\Images\\PawnImages\\redPawn.png")
+                    {
+                        RedBase[i] = "\\Images\\PawnImages\\redHighlightedPawn.png";
+                    }
+                }
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Yellow)
+            {
+                for (int i = 0; i < YellowBase.Count; i++)
+                {
+                    if (YellowBase[i] == "\\Images\\PawnImages\\yellowPawn.png")
+                    {
+                        YellowBase[i] = "\\Images\\PawnImages\\yellowHighlightedPawn.png";
+                    }
+                }
             }
         }
 
@@ -191,7 +321,7 @@ namespace Ludo.ViewModels
         {
             _isDiceEanbled = false;
             ChangeDiceValue(diceValue);
-            ShowAvailableMoves();
+            ShowAvailableMoves(diceValue);
         }
 
         #region Commands
