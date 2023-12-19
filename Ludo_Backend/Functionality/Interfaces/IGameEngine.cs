@@ -5,7 +5,6 @@ namespace Ludo_Backend.Functionaity.Interfaces
 {
     public interface IGameEngine : IGameEngineSubject
     {
-        List<Tile> Tiles { get; }
         List<Player> Players { get; set; }
         Player CurrentPlayerTurn { get; set; }
 
