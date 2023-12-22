@@ -184,5 +184,11 @@
     <Resource Include="Images\PawnImages\redHighlightedPawn.png" />
     <Resource Include="Images\PawnImages\yellowHighlightedPawn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\white.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\black.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

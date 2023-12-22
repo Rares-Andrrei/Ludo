@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Ludo_Backend.Observer;
+using System.Collections.Generic;
 
 namespace Ludo_Backend.Functionaity.Interfaces
 {
-    public interface IBoard
+    public interface IBoard : IGameEngineSubject
     {
         List<Tile> Tiles { get; set; }
 
-        bool MovePawn(Pawn pawn, byte steps);
+        bool MoveInPlayPawn(byte pawnPosition, byte steps);
         bool CanMovePawn(Pawn pawn, byte steps);
-        bool ReleasePawnFromBase(Pawn pawn);
+        bool ReleasePawnFromBase(Player player);
     }
 }

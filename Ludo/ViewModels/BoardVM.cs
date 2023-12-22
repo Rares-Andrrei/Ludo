@@ -5,6 +5,8 @@ using Ludo_Backend.Observer;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using static Ludo_Backend.Functionaity.Player;
 
@@ -25,7 +27,16 @@ namespace Ludo.ViewModels
         private const string highlightedYellow = "\\Images\\PawnImages\\yellowHighlightedPawn.png";
 
         private IGameEngine _gameEngine;
-        public ObservableCollection<string> Tiles { get; set; }
+        private ObservableCollection<string> _tiles;
+        public ObservableCollection<string> Tiles
+        {
+            get { return _tiles; }
+            set
+            {
+                _tiles = value;
+                OnPropertyChanged();
+            }
+        }
         private Player _currentPlayerTurn;
         public Player CurrentPlayerTurn
         {
@@ -141,9 +152,11 @@ namespace Ludo.ViewModels
             }
         }
 
+        private byte lastBasePawnClicked;
+
         private void InitializeViewModel()
         {
-            Tiles = new ObservableCollection<string>(Enumerable.Repeat<string>(null, TilesNr).ToList());
+            Tiles = new ObservableCollection<string>(Enumerable.Repeat<string>("", TilesNr).ToList());
             if (RedPlayerName != null)
             {
                 RedBase = new ObservableCollection<string>(Enumerable.Repeat<string>(redPawn, PawnsNr).ToList());
@@ -173,7 +186,8 @@ namespace Ludo.ViewModels
             _gameEngine.Attach(this);
             UpdatePlayerColors();
             InitializeViewModel();
-            NextPlayerTurn();
+            CurrentPlayerTurn = _gameEngine.CurrentPlayerTurn;
+            _isDiceEanbled = true;
         }
         private void UpdatePlayerColors()
         {
@@ -195,11 +209,6 @@ namespace Ludo.ViewModels
                         break;
                 }
             });
-        }
-        private void NextPlayerTurn()
-        {
-            CurrentPlayerTurn = _gameEngine.CurrentPlayerTurn;
-            _isDiceEanbled = true;
         }
 
         private void ChangeDiceValue(byte diceValue)
@@ -229,14 +238,14 @@ namespace Ludo.ViewModels
                     break;
             }
         }
+
         private void ShowAvailableMoves(byte diceValue)
         {
             List<Pawn> availablePawns = _gameEngine.AvailablePawnsToMoveForCurrentPlayer();
 
             if (availablePawns.Count == 0)
             {
-                _gameEngine.FinishedTurn();
-                NextPlayerTurn();
+                MoveMade();
                 return;
             }
 
@@ -244,8 +253,8 @@ namespace Ludo.ViewModels
             {
                 if (pawn.State == Pawn.PawnState.InPlay)
                 {
-                    string imageName = $"{CurrentPlayerTurn.Color.ToString().ToLower()}HighlitedPawn.png";
-                    Tiles[pawn.Position] = $"\\Images\\PawnImages\\imageName";
+                    string imageName = $"{CurrentPlayerTurn.Color.ToString().ToLower()}HighlightedPawn.png";
+                    Tiles[pawn.Position] = $"\\Images\\PawnImages\\{imageName}";
                 }
                 else if (pawn.State == Pawn.PawnState.AlmostFinished)
                 {
@@ -258,7 +267,6 @@ namespace Ludo.ViewModels
                 HighlightBaseAvailablePawns(CurrentPlayerTurn);
             }
         }
-
         private void HighlightAlmostFinishedAvailablePawns(Player CurrentPlayerTurn, byte position)
         {
             if (CurrentPlayerTurn.Color == PlayerColor.Blue)
@@ -276,25 +284,6 @@ namespace Ludo.ViewModels
             else if (CurrentPlayerTurn.Color == PlayerColor.Yellow)
             {
                 YellowPath[position] = highlightedYellow;
-            }
-        }
-        private void RemoveHighlightAlmostFinishedAvailablePawns(Player CurrentPlayerTurn, byte position)
-        {
-            if (CurrentPlayerTurn.Color == PlayerColor.Blue)
-            {
-                BluePath[position] = bluePawn;
-            }
-            else if (CurrentPlayerTurn.Color == PlayerColor.Green)
-            {
-                GreenPath[position] = greenPawn;
-            }
-            else if (CurrentPlayerTurn.Color == PlayerColor.Red)
-            {
-                RedPath[position] = redPawn;
-            }
-            else if (CurrentPlayerTurn.Color == PlayerColor.Yellow)
-            {
-                YellowPath[position] = yellowPawn;
             }
         }
         private void HighlightBaseAvailablePawns(Player CurrentPlayerTurn)
@@ -340,6 +329,7 @@ namespace Ludo.ViewModels
                 }
             }
         }
+
         private void RemoveHighlightBaseAvailablePawns(Player CurrentPlayerTurn)
         {
             if (CurrentPlayerTurn.Color == PlayerColor.Blue)
@@ -383,8 +373,26 @@ namespace Ludo.ViewModels
                 }
             }
         }
-
-        private void RemoveHighlihtFromAll()
+        private void RemoveHighlightAlmostFinishedAvailablePawns(Player CurrentPlayerTurn, byte position)
+        {
+            if (CurrentPlayerTurn.Color == PlayerColor.Blue)
+            {
+                BluePath[position] = bluePawn;
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Green)
+            {
+                GreenPath[position] = greenPawn;
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Red)
+            {
+                RedPath[position] = redPawn;
+            }
+            else if (CurrentPlayerTurn.Color == PlayerColor.Yellow)
+            {
+                YellowPath[position] = yellowPawn;
+            }
+        }
+        private void RemoveHighlihtFromAllPawns()
         {
             List<Pawn> availablePawns = _gameEngine.AvailablePawnsToMoveForCurrentPlayer();
 
@@ -393,7 +401,7 @@ namespace Ludo.ViewModels
                 if (pawn.State == Pawn.PawnState.InPlay)
                 {
                     string imageName = $"{CurrentPlayerTurn.Color.ToString().ToLower()}Pawn.png";
-                    Tiles[pawn.Position] = $"\\Images\\PawnImages\\imageName";
+                    Tiles[pawn.Position] = $"\\Images\\PawnImages\\{imageName}";
                 }
                 else if (pawn.State == Pawn.PawnState.AlmostFinished)
                 {
@@ -402,6 +410,15 @@ namespace Ludo.ViewModels
             }
             RemoveHighlightBaseAvailablePawns(CurrentPlayerTurn);
         }
+        public void MoveMade()
+        {
+            RemoveHighlihtFromAllPawns();
+            _gameEngine.FinishedTurn();
+            CurrentPlayerTurn = _gameEngine.CurrentPlayerTurn;
+            _isDiceEanbled = true;
+        }
+
+        #region Notify
 
         public void NotifyDiceRolled(byte diceValue)
         {
@@ -409,6 +426,49 @@ namespace Ludo.ViewModels
             ChangeDiceValue(diceValue);
             ShowAvailableMoves(diceValue);
         }
+
+        public async void NotifyInPlayPawnMoveMade(byte pawnPosition, byte steps)
+        {
+            int milliseconds = 800;
+            RemoveHighlihtFromAllPawns();
+            for (int i = pawnPosition; i <= steps; i++)
+            {
+                Tiles[pawnPosition] = null;
+                Tiles[pawnPosition + steps] = $"\\Images\\PawnImages\\{CurrentPlayerTurn.Color.ToString().ToLower()}Pawn.png";
+                await Task.Delay(milliseconds);
+            }         
+        }
+
+        public void NotifySolvePawnCollision(byte pawnPosition)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyPawnReleasedFromBase(PlayerColor color, byte newPos)
+        {           
+            switch(color)
+            {
+                case PlayerColor.Red:
+                    RedBase[lastBasePawnClicked] = "";
+                    Tiles[newPos] = redPawn;
+                    break;
+                case PlayerColor.Blue:
+                    BlueBase[lastBasePawnClicked] = "";
+                    Tiles[newPos] = bluePawn;
+                    break;
+                case PlayerColor.Green:
+                    GreenBase[lastBasePawnClicked] = "";
+                    Tiles[newPos] = greenPawn;
+                    break;
+                case PlayerColor.Yellow:
+                    YellowBase[lastBasePawnClicked] = "";
+                    Tiles[newPos] = yellowPawn;
+                    break;
+            }
+            MoveMade();
+        }
+
+        #endregion
 
         #region Commands
 
@@ -444,7 +504,7 @@ namespace Ludo.ViewModels
 
         private void PawnSelected(object parameter)
         {
-
+            _gameEngine.MovePawn(byte.Parse(parameter as string));
         }
 
         private ICommand _pawnBaseSelected;
@@ -460,7 +520,15 @@ namespace Ludo.ViewModels
 
         private void PawnBaseSelected(object parameter)
         {
+            string[] parts = (parameter as string).Split(' ');
 
+            if (parts[1] == CurrentPlayerTurn.Color.ToString())
+            {
+                if (_gameEngine.ReleasePawnFromBaseCurrentPlayer())
+                {
+                    lastBasePawnClicked = byte.Parse(parts[0]);
+                }
+            }          
         }
 
         private ICommand _pawnPathSelected;
@@ -476,9 +544,9 @@ namespace Ludo.ViewModels
 
         private void PawnPathSelected(object parameter)
         {
-            int position = int.Parse(parameter as string);
-            
+            int position = int.Parse(parameter as string);   
         }
+
         #endregion
 
     }

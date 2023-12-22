@@ -1,4 +1,5 @@
 ﻿using Ludo_Backend.Functionaity.Interfaces;
+using Ludo_Backend.Observer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ namespace Ludo_Backend.Functionaity
 {
     public class Board : IBoard
     {
+        private List<IGameEngineOberver> observers;
         private byte MaximumPlayesNr = 4;
         private const byte TilesNumber = 52;
         private const byte PlayerAreaTilesNumber = 5;
@@ -15,6 +17,7 @@ namespace Ludo_Backend.Functionaity
 
         public Board(List<Player> players)
         {
+            observers = new List<IGameEngineOberver>();
             InitializeBoard(players);
             InitializePawns(players);
         }
@@ -24,9 +27,12 @@ namespace Ludo_Backend.Functionaity
             byte nrOfPawns = 4;
 
             foreach (var player in players)
-            {
-                Pawn pawn = new Pawn(player);
-                player.Pawns = Enumerable.Repeat<Pawn>(pawn, nrOfPawns).ToList();
+            {                
+                for(byte i = 0; i < nrOfPawns; i++)
+                {
+                    Pawn pawn = new Pawn(player);
+                    player.Pawns.Add(pawn);
+                }
             }
         }
 
@@ -55,8 +61,15 @@ namespace Ludo_Backend.Functionaity
             }
         }
 
-        public bool MovePawn(Pawn pawn, byte steps)
+        public bool MoveInPlayPawn(byte pawnPosition, byte steps)
         {
+            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.FirstOrDefault();
+
+            if(pawn == null)
+            {
+                return false;
+            }
+
             byte destination = (byte)(pawn.Position + steps);
 
             if (pawn.State == Pawn.PawnState.InBase || pawn.State == Pawn.PawnState.Finished)
@@ -86,6 +99,7 @@ namespace Ludo_Backend.Functionaity
                     }
 
                     AddPawnToTile(pawn, destination);
+                    observers.ForEach(observer => observer.NotifyInPlayPawnMoveMade(pawnPosition, steps));
                 }
             }
             else if (pawn.State == Pawn.PawnState.AlmostFinished)
@@ -156,15 +170,29 @@ namespace Ludo_Backend.Functionaity
             return true;
         }
 
-        public bool ReleasePawnFromBase(Pawn pawn)
+        public bool ReleasePawnFromBase(Player player)
         {
-            if (pawn.State != Pawn.PawnState.InBase)
+            Pawn playerPawn = player.Pawns.FirstOrDefault(pawn => pawn.State == Pawn.PawnState.InBase);
+
+            if (playerPawn == null)
             {
                 return false;
             }
-            pawn.State = Pawn.PawnState.InPlay;
-            AddPawnToTile(pawn, pawn.Owner.StartPosition);
+
+            playerPawn.State = Pawn.PawnState.InPlay;
+            AddPawnToTile(playerPawn, playerPawn.Owner.StartPosition);
+            observers.ForEach(observer => observer.NotifyPawnReleasedFromBase(playerPawn.Owner.Color, playerPawn.Owner.StartPosition));
             return true;
+        }
+
+        public void Attach(IGameEngineOberver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void Detach(IGameEngineOberver observer)
+        {
+            observers.Remove(observer);
         }
     }
 }

@@ -7,9 +7,14 @@ namespace Ludo_Backend.Functionaity
         public enum PlayerColor
         {
             Blue,
-            Green,
-            Red,
             Yellow,
+            Red,
+            Green,
+        }
+
+        public Player()
+        {
+            Pawns = new List<Pawn>();
         }
 
         public string Name { get; set; }

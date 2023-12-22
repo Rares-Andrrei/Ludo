@@ -13,17 +13,15 @@ namespace Ludo_Backend.Functionaity
         private byte _diceValue;
         private List<IGameEngineOberver> observers;
         private readonly Random random = new Random();
-        private Board board;
+        private IBoard board;
 
         public List<Player> Players { get; set; }
         public Player CurrentPlayerTurn { get; set; }
-        public List<Tile> Tiles { get; }
 
         public GameEngine(List<string> playersNames)
         {
             observers = new List<IGameEngineOberver>();
             InitializeGame(playersNames);
-            Tiles = board.Tiles;
         }
 
         private void InitializeGame(List<string> playersNames)
@@ -62,9 +60,9 @@ namespace Ludo_Backend.Functionaity
             return _diceValue;
         }
 
-        public bool MovePawn(Pawn pawn, byte steps)
+        public void MovePawn(byte pawnPosition)
         {
-            return board.MovePawn(pawn, steps);
+            board.MoveInPlayPawn(pawnPosition, _diceValue);
         }
 
         public bool CanMovePawn(Pawn pawn, byte steps)
@@ -72,9 +70,13 @@ namespace Ludo_Backend.Functionaity
             return board.CanMovePawn(pawn, steps);
         }
 
-        public bool ReleasePawnFromBase(Pawn pawn)
+        public bool ReleasePawnFromBaseCurrentPlayer()
         {
-            return board.ReleasePawnFromBase(pawn);
+            if(_diceValue != 6)
+            {
+                return false;
+            }
+            return board.ReleasePawnFromBase(CurrentPlayerTurn);
         }
 
         public Player CheckWinState()
@@ -93,11 +95,13 @@ namespace Ludo_Backend.Functionaity
         public void Attach(IGameEngineOberver observer)
         {
             observers.Add(observer);
+            board.Attach(observer);
         }
 
         public void Detach(IGameEngineOberver observer)
         {
             observers.Remove(observer);
+            board.Detach(observer);
         }
 
         public List<Pawn> AvailablePawnsToMoveForCurrentPlayer()

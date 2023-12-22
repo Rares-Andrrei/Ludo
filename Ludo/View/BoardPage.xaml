@@ -76,58 +76,58 @@
         <Image Grid.Row="10" Grid.Column="12" Grid.RowSpan="6" Grid.ColumnSpan="6" Source="\Images\greenBase.png" Stretch="Fill"/>
 
         <!--pioni baza albastra-->
-        <Button Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="8,7,29,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="2" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="8,7,29,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0 Blue"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image  Width="50" Height="50" Source="{Binding BlueBase[0]}"/>
         </Button>
-        <Button Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,7,9,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="2" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,7,9,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1 Blue"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image  Width="50" Height="50" Source="{Binding BlueBase[1]}"/>
         </Button>
-        <Button Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="13,28,33,8" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="13,28,33,8" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2 Blue"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding BlueBase[2]}"/>
         </Button>
-        <Button Grid.Row="4" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="33,28,13,8" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="4" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="33,28,13,8" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3 Blue"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding BlueBase[3]}"/>
         </Button>
 
         <!--pioni baza galbena-->
-        <Button Grid.Row="2" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,7,30,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="2" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,7,30,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0 Yellow"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding YellowBase[0]}"/>
         </Button>
-        <Button Grid.Row="2" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,7,8,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="2" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,7,8,19" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1 Yellow"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding YellowBase[1]}"/>
         </Button>
-        <Button Grid.Row="4" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,23,30,3" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="4" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,23,30,3" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2 Yellow"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding YellowBase[2]}"/>
         </Button>
-        <Button Grid.Row="4" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,23,8,3" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="4" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,23,8,3" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3 Yellow"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding YellowBase[3]}"/>
         </Button>
 
         <!--pioni baza rosie-->
-        <Button Grid.Row="11" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,10,29,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="11" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,10,29,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0 Red"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding RedBase[0]}"/>
         </Button>
-        <Button Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,26,29,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,26,29,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1 Red"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding RedBase[1]}"/>
         </Button>
-        <Button Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="30,10,8,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="30,10,8,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2 Red"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding RedBase[2]}"/>
         </Button>
-        <Button Grid.Row="13" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="30,26,8,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="13" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="30,26,8,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3 Red"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding RedBase[3]}"/>
         </Button>
 
         <!--piopioni baza verde-->
-        <Button Grid.Row="11" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,10,30,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="11" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,10,30,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="0 Green"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding GreenBase[0]}"/>
         </Button>
-        <Button Grid.Row="11" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="29,10,8,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="11" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="29,10,8,16" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="1 Green"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding GreenBase[1]}"/>
         </Button>
-        <Button Grid.Row="13" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,26,30,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="13" Grid.Column="13" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="8,26,30,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="2 Green"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding GreenBase[2]}"/>
         </Button>
-        <Button Grid.Row="13" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,26,8,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
+        <Button Grid.Row="13" Grid.Column="15" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="29,26,8,0" Command="{Binding PawnBaseSelectedCommand}" CommandParameter="3 Green"  Style="{x:Null}" Background="Transparent" BorderThickness="0">
             <Image Width="50" Height="50" Source="{Binding GreenBase[3]}"/>
         </Button>
 
@@ -147,7 +147,7 @@
         </Button>
 
         <Rectangle Grid.Row="2" Grid.Column="11" Fill="#f4ce4f"/>
-        <Button Grid.Row="2" Grid.Column="11" Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[13]}"  Style="{x:Null}" Background="Transparent" >
+        <Button Grid.Row="2" Grid.Column="11"  Command="{Binding PawnSelectedCommand}" CommandParameter="{Binding Tiles[13]}"  Style="{x:Null}" Background="Transparent" >
             <Image Height="25" Width="25" Source="{Binding Tiles[13]}"/>
         </Button>
 
