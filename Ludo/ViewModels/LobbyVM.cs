@@ -69,6 +69,7 @@ namespace Ludo.ViewModels
             }
 
             BoardPage boardPage = _serviceCollection.GetService<BoardPage>();
+            boardPage.DataContext = _serviceCollection.GetService<BoardVM>();
             ((BoardVM)boardPage.DataContext).InitializeGame(playerNames);
 
             _navigationService.NavigateTo(boardPage);

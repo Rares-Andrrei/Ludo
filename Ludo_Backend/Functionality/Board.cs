@@ -14,9 +14,11 @@ namespace Ludo_Backend.Functionaity
         private const byte PlayerAreaTilesNumber = 5;
 
         public List<Tile> Tiles { get; set; }
+        public List<Pawn> InAlmostFinishedPathPawns { get; set; }
 
         public Board(List<Player> players)
         {
+            InAlmostFinishedPathPawns = new List<Pawn>();
             observers = new List<IGameEngineOberver>();
             InitializeBoard(players);
             InitializePawns(players);
@@ -61,8 +63,32 @@ namespace Ludo_Backend.Functionaity
             }
         }
 
+        private byte CalculateDestination(byte pawnPosition, byte steps)
+        {
+            byte destination = (byte)(pawnPosition + steps);
+
+            if (destination >= TilesNumber)
+            {
+                destination -= TilesNumber;
+            }
+
+            return destination;
+        }
+
+        private void PlayerScored(Player player)
+        {
+            player.Score++;
+            observers.ForEach(observer => observer.NotifyScoreCanged(player.Color, player.Score));
+            if (player.Score == 4)
+            {
+                observers.ForEach(observer => observer.NotifyGameFinished(player.Color));
+            }
+        }
+
         public bool MoveInPlayPawn(byte pawnPosition, byte steps)
         {
+            byte destination = CalculateDestination(pawnPosition, steps);
+
             Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.FirstOrDefault();
 
             if(pawn == null)
@@ -70,54 +96,40 @@ namespace Ludo_Backend.Functionaity
                 return false;
             }
 
-            byte destination = (byte)(pawn.Position + steps);
-
-            if (pawn.State == Pawn.PawnState.InBase || pawn.State == Pawn.PawnState.Finished)
-            {
-                return false;
-            }
-
             if (pawn.State == Pawn.PawnState.InPlay)
             {
-                RemovePawnFromOldTile(pawn, pawn.Position);
+                Tiles[pawnPosition].CurrentOwnerPawns.Remove(pawn);
 
                 if (pawn.Position == pawn.Owner.EndPosition && steps == 6)
                 {
                     pawn.State = Pawn.PawnState.Finished;
+                    PlayerScored(pawn.Owner);
+                    observers.ForEach(observer => observer.NotifyPawnFinished(Pawn.PawnState.InPlay, pawn.Owner.Color, pawn.Position));
+
                 }
-                else if (destination > pawn.Owner.EndPosition)
+                else if (pawnPosition + steps > pawn.Owner.EndPosition && pawnPosition <= pawn.Owner.EndPosition)
                 {
-                    int extraSteps = destination - pawn.Owner.EndPosition;
+                    int extraSteps = pawnPosition + steps - pawn.Owner.EndPosition - 1;
                     pawn.State = Pawn.PawnState.AlmostFinished;
                     pawn.Position = (byte)extraSteps;
+                    InAlmostFinishedPathPawns.Add(pawn);
+                    observers.ForEach(observer => observer.NotifyInPlayToAlmostFinishedPawnMoveMade(pawn.Owner.Color, pawnPosition, (byte)extraSteps));
                 }
                 else
                 {
                     if (CheckCollision(pawn, destination))
                     {
-                        SolveCollision(destination);
+                        Tiles[pawnPosition].CurrentOwnerPawns.Add(pawn);
+                        observers.ForEach(observer => observer.NotifyCollision());
+                        return true;
                     }
 
                     AddPawnToTile(pawn, destination);
-                    observers.ForEach(observer => observer.NotifyInPlayPawnMoveMade(pawnPosition, steps));
+                    observers.ForEach(observer => observer.NotifyInPlayPawnMoveMade(pawnPosition, destination));
                 }
+                return true;
             }
-            else if (pawn.State == Pawn.PawnState.AlmostFinished)
-            {
-                if (destination == PlayerAreaTilesNumber + 1)
-                {
-                    pawn.State = Pawn.PawnState.Finished;
-                }
-                else if (destination > PlayerAreaTilesNumber + 1)
-                {
-                    return false;
-                }
-                else
-                {
-                    pawn.Position += steps;
-                }
-            }
-            return true;
+            return false;
         }
 
         private bool CheckCollision(Pawn pawn, byte destination)
@@ -133,32 +145,42 @@ namespace Ludo_Backend.Functionaity
             return false;
         }
 
-        private void SolveCollision(byte destination)
-        {
-            foreach (Pawn enemyPawn in Tiles[destination].CurrentOwnerPawns)
-            {
-                enemyPawn.Position = enemyPawn.Owner.StartPosition;
-                enemyPawn.State = Pawn.PawnState.InBase;
-                Tiles[destination].CurrentOwnerPawns.Remove(enemyPawn);
-            }
-        }
-
         private void AddPawnToTile(Pawn pawn, byte tileNr)
         {
             Tiles[tileNr].CurrentOwnerPawns.Add(pawn);
             pawn.Position = tileNr;
         }
 
-        private void RemovePawnFromOldTile(Pawn pawn, byte tileNr)
+        public bool IsMoveValid(byte pawnPosition, byte steps, Player currentPlayerTurn)
         {
-            Tiles[tileNr].CurrentOwnerPawns.Remove(pawn);
+
+            byte destination = (byte)(pawnPosition + steps);
+            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.FirstOrDefault();
+            if (pawn == null)
+            {
+                return false;
+            }
+            else if(pawn.Owner != currentPlayerTurn)
+            {
+                return false;
+            }
+            else if (pawn.State == Pawn.PawnState.AlmostFinished && destination > PlayerAreaTilesNumber + 1)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool CanMovePawn(Pawn pawn, byte steps)
         {
             byte destination = (byte)(pawn.Position + steps);
 
-            if (pawn.State == Pawn.PawnState.InBase && steps != 6)
+            if (pawn.State == Pawn.PawnState.Finished)
+            {
+                return false;
+            }
+            else if(pawn.State == Pawn.PawnState.InBase && steps != 6)
             {
                 return false;
             }
@@ -193,6 +215,38 @@ namespace Ludo_Backend.Functionaity
         public void Detach(IGameEngineOberver observer)
         {
             observers.Remove(observer);
+        }
+
+        public bool MoveAlmostFinishedPawn(Player.PlayerColor playerColor, byte position, byte steps)
+        {
+            byte destination = (byte)(position + steps);
+
+            Pawn pawn = InAlmostFinishedPathPawns.Where(oPawn => oPawn.Owner.Color == playerColor && oPawn.Position == position).FirstOrDefault();
+
+            if (pawn == null)
+            {
+                return false;
+            }
+
+            if (pawn.State == Pawn.PawnState.AlmostFinished)
+            {
+                if (destination == PlayerAreaTilesNumber)
+                {
+                    pawn.State = Pawn.PawnState.Finished;
+                    PlayerScored(pawn.Owner);
+                    observers.ForEach(observer => observer.NotifyPawnFinished(Pawn.PawnState.AlmostFinished, pawn.Owner.Color, pawn.Position));
+                }
+                else if (destination > PlayerAreaTilesNumber)
+                {
+                    return false;
+                }
+                else
+                {
+                    pawn.Position += steps;
+                    observers.ForEach(observer => observer.NotifyAlmostFinishedPawnMoveMade(pawn.Owner.Color, position, destination));
+                }
+            }
+            return true;
         }
     }
 }

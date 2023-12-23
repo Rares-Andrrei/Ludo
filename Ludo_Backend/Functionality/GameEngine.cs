@@ -54,18 +54,20 @@ namespace Ludo_Backend.Functionaity
         }
 
         public byte RollDice()
-        {       
+        {
             _diceValue = (byte)random.Next(1, 7);
             observers.ForEach(observer => observer.NotifyDiceRolled(_diceValue));
             return _diceValue;
         }
 
-        public void MovePawn(byte pawnPosition)
+        public void MoveInPlayPawn(byte pawnPosition)
         {
-            board.MoveInPlayPawn(pawnPosition, _diceValue);
+            if (board.IsMoveValid(pawnPosition, _diceValue, CurrentPlayerTurn))
+            {
+                board.MoveInPlayPawn(pawnPosition, _diceValue);
+            }
         }
-
-        public bool CanMovePawn(Pawn pawn, byte steps)
+        private bool CanMovePawn(Pawn pawn, byte steps)
         {
             return board.CanMovePawn(pawn, steps);
         }
@@ -77,19 +79,6 @@ namespace Ludo_Backend.Functionaity
                 return false;
             }
             return board.ReleasePawnFromBase(CurrentPlayerTurn);
-        }
-
-        public Player CheckWinState()
-        {
-            foreach (Player player in Players)
-            {
-                if (player.Pawns.All(pawn => pawn.State == Pawn.PawnState.Finished))
-                {
-                    return player;
-                }
-            }
-
-            return null;
         }
 
         public void Attach(IGameEngineOberver observer)
@@ -116,6 +105,16 @@ namespace Ludo_Backend.Functionaity
             });
 
             return pawns;
+        }
+
+        public bool MoveAlmostFinishedPawn(Player.PlayerColor playerColor, byte position)
+        {
+            if (playerColor != CurrentPlayerTurn.Color)
+            {
+                return false;
+            }
+
+            return board.MoveAlmostFinishedPawn(playerColor, position, _diceValue);
         }
     }
 }

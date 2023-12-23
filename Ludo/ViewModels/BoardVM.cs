@@ -1,4 +1,6 @@
-﻿using Ludo.ViewModels.Commands;
+﻿using Ludo.Service;
+using Ludo.View;
+using Ludo.ViewModels.Commands;
 using Ludo_Backend.Functionaity;
 using Ludo_Backend.Functionaity.Interfaces;
 using Ludo_Backend.Observer;
@@ -6,7 +8,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using static Ludo_Backend.Functionaity.Player;
 
@@ -16,6 +20,7 @@ namespace Ludo.ViewModels
     {
         private const byte TilesNr = 52;
         private const byte PawnsNr = 4;
+        private const byte pathTilesNumber = 5;
         private const string defaultDice = "\\Images\\DiceImages\\dice.jpeg";
         private const string redPawn = "\\Images\\PawnImages\\redPawn.png";
         private const string bluePawn = "\\Images\\PawnImages\\bluePawn.png";
@@ -25,6 +30,15 @@ namespace Ludo.ViewModels
         private const string highlightedBlue = "\\Images\\PawnImages\\blueHighlightedPawn.png";
         private const string highlightedGreen = "\\Images\\PawnImages\\greenHighlightedPawn.png";
         private const string highlightedYellow = "\\Images\\PawnImages\\yellowHighlightedPawn.png";
+
+        private readonly NavigationService _navigationService;
+        private readonly ServiceCollection _serviceCollection;
+
+        public BoardVM(ServiceCollection serviceCollection, NavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            _serviceCollection = serviceCollection;
+        }
 
         private IGameEngine _gameEngine;
         private ObservableCollection<string> _tiles;
@@ -70,8 +84,26 @@ namespace Ludo.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<string> RedPath { get; set; }
-        public byte RedPlayerScore { get; set; }
+        private ObservableCollection<string> _redPath;
+        public ObservableCollection<string> RedPath
+        {
+            get { return _redPath; }
+            set
+            {
+                _redPath = value;
+                OnPropertyChanged();
+            }
+        }
+        private byte _redPlayerScore;
+        public byte RedPlayerScore
+        {
+            get { return _redPlayerScore; }
+            set
+            {
+                _redPlayerScore = value;
+                OnPropertyChanged();
+            }
+        }
         private string _redPlayerName;
         public string RedPlayerName
         {
@@ -93,8 +125,26 @@ namespace Ludo.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<string> BluePath { get; set; }
-        public byte BluePlayerScore { get; set; }
+        private ObservableCollection<string> _bluePath;
+        public ObservableCollection<string> BluePath
+        {
+            get { return _bluePath; }
+            set
+            {
+                _bluePath = value;
+                OnPropertyChanged();
+            }
+        }
+        private byte _bluePlayerScore;
+        public byte BluePlayerScore
+        {
+            get { return _bluePlayerScore; }
+            set
+            {
+                _bluePlayerScore = value;
+                OnPropertyChanged();
+            }
+        }
         private string _bluePlayerName;
         public string BluePlayerName
         {
@@ -116,8 +166,26 @@ namespace Ludo.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<string> GreenPath { get; set; }
-        public byte GreenPlayerScore { get; set; }
+        private ObservableCollection<string> _greenPath;
+        public ObservableCollection<string> GreenPath
+        {
+            get { return _greenPath; }
+            set
+            {
+                _greenPath = value;
+                OnPropertyChanged();
+            }
+        }
+        private byte _greenPlayerScore;
+        public byte GreenPlayerScore
+        {
+            get { return _greenPlayerScore; }
+            set
+            {
+                _greenPlayerScore = value;
+                OnPropertyChanged();
+            }
+        }
         private string _greenPlayerName;
         public string GreenPlayerName
         {
@@ -139,8 +207,26 @@ namespace Ludo.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<string> YellowPath { get; set; }
-        public byte YellowPlayerScore { get; set; }
+        private ObservableCollection<string> _yellowPath;
+        public ObservableCollection<string> YellowPath
+        {
+            get { return _yellowPath; }
+            set
+            {
+                _yellowPath = value;
+                OnPropertyChanged();
+            }
+        }
+        private byte _yellowPlayerScore;
+        public byte YellowPlayerScore
+        {
+            get { return _yellowPlayerScore; }
+            set
+            {
+                _yellowPlayerScore = value;
+                OnPropertyChanged();
+            }
+        }
         private string _yellowPlayerName;
         public string YellowPlayerName
         {
@@ -160,21 +246,25 @@ namespace Ludo.ViewModels
             if (RedPlayerName != null)
             {
                 RedBase = new ObservableCollection<string>(Enumerable.Repeat<string>(redPawn, PawnsNr).ToList());
+                RedPath = new ObservableCollection<string>(Enumerable.Repeat<string>("", pathTilesNumber).ToList());
                 RedPlayerScore = 0;
             }
             if (BluePlayerName != null)
             {
                 BlueBase = new ObservableCollection<string>(Enumerable.Repeat<string>(bluePawn, PawnsNr).ToList());
+                BluePath = new ObservableCollection<string>(Enumerable.Repeat<string>("", pathTilesNumber).ToList());
                 BluePlayerScore = 0;
             }
             if (GreenPlayerName != null)
             {
                 GreenBase = new ObservableCollection<string>(Enumerable.Repeat<string>(greenPawn, PawnsNr).ToList());
+                GreenPath = new ObservableCollection<string>(Enumerable.Repeat<string>("", pathTilesNumber).ToList());
                 GreenPlayerScore = 0;
             }
             if (YellowPlayerName != null)
             {
                 YellowBase = new ObservableCollection<string>(Enumerable.Repeat<string>(yellowPawn, PawnsNr).ToList());
+                YellowPath = new ObservableCollection<string>(Enumerable.Repeat<string>("", pathTilesNumber).ToList());
                 YellowPlayerScore = 0;
             }
 
@@ -416,6 +506,7 @@ namespace Ludo.ViewModels
             _gameEngine.FinishedTurn();
             CurrentPlayerTurn = _gameEngine.CurrentPlayerTurn;
             _isDiceEanbled = true;
+            DiceImage = defaultDice;
         }
 
         #region Notify
@@ -427,26 +518,18 @@ namespace Ludo.ViewModels
             ShowAvailableMoves(diceValue);
         }
 
-        public async void NotifyInPlayPawnMoveMade(byte pawnPosition, byte steps)
+        public void NotifyInPlayPawnMoveMade(byte pawnPosition, byte destination)
         {
-            int milliseconds = 800;
             RemoveHighlihtFromAllPawns();
-            for (int i = pawnPosition; i <= steps; i++)
-            {
-                Tiles[pawnPosition] = null;
-                Tiles[pawnPosition + steps] = $"\\Images\\PawnImages\\{CurrentPlayerTurn.Color.ToString().ToLower()}Pawn.png";
-                await Task.Delay(milliseconds);
-            }         
-        }
-
-        public void NotifySolvePawnCollision(byte pawnPosition)
-        {
-            throw new System.NotImplementedException();
+            Tiles[pawnPosition] = "";
+            Tiles[destination] = $"\\Images\\PawnImages\\{CurrentPlayerTurn.Color.ToString().ToLower()}Pawn.png";
+            MoveMade();
         }
 
         public void NotifyPawnReleasedFromBase(PlayerColor color, byte newPos)
-        {           
-            switch(color)
+        {
+            MoveMade();
+            switch (color)
             {
                 case PlayerColor.Red:
                     RedBase[lastBasePawnClicked] = "";
@@ -464,6 +547,124 @@ namespace Ludo.ViewModels
                     YellowBase[lastBasePawnClicked] = "";
                     Tiles[newPos] = yellowPawn;
                     break;
+            }
+        }
+
+        public void NotifyScoreCanged(PlayerColor color, byte score)
+        {
+            switch (color)
+            {
+                case PlayerColor.Red:
+                    RedPlayerScore = score;
+                    break;
+                case PlayerColor.Blue:
+                    BluePlayerScore = score;
+                    break;
+                case PlayerColor.Green:
+                    GreenPlayerScore = score;
+                    break;
+                case PlayerColor.Yellow:
+                    YellowPlayerScore = score;
+                    break;
+            }
+        }
+
+        public void NotifyGameFinished(PlayerColor winner)
+        {
+            switch (winner)
+            {
+                case PlayerColor.Red:
+                    MessageBox.Show($"{RedPlayerName} player won", "Finish", MessageBoxButton.OK);
+                    break;
+                case PlayerColor.Blue:
+                    MessageBox.Show($"{BluePlayerName} player won", "Finish", MessageBoxButton.OK);
+                    break;
+                case PlayerColor.Green:
+                    MessageBox.Show($"{GreenPlayerName} player won", "Finish", MessageBoxButton.OK);
+                    break;
+                case PlayerColor.Yellow:
+                    MessageBox.Show($"{YellowPlayerName} player won", "Finish", MessageBoxButton.OK);
+                    break;
+            }
+
+            StartingPage startPage = _serviceCollection.GetService<StartingPage>();
+            _navigationService.NavigateTo(startPage);
+            
+        }
+
+        public void NotifyAlmostFinishedPawnMoveMade(Player.PlayerColor playerColor, byte pawnPosition, byte destination)
+        {
+            switch (playerColor)
+            {
+                case PlayerColor.Red:
+                    RedPath[pawnPosition] = "";
+                    RedPath[destination] = redPawn;
+                    break;
+                case PlayerColor.Blue:
+                    BluePath[pawnPosition] = "";
+                    BluePath[destination] = bluePawn;
+                    break;
+                case PlayerColor.Green:
+                    GreenPath[pawnPosition] = "";
+                    GreenPath[destination] = greenPawn;
+                    break;
+                case PlayerColor.Yellow:
+                    YellowPath[pawnPosition] = "";
+                    YellowPath[destination] = yellowPawn;
+                    break;
+            }
+            MoveMade();
+        }
+
+        public void NotifyInPlayToAlmostFinishedPawnMoveMade(PlayerColor playerColor, byte pawnPosition, byte destination)
+        {
+            Tiles[pawnPosition] = "";
+
+            switch (playerColor)
+            {
+                case PlayerColor.Red:
+                    RedPath[destination] = redPawn;
+                    break;
+                case PlayerColor.Blue:
+                    BluePath[destination] = bluePawn;
+                    break;
+                case PlayerColor.Green:
+                    GreenPath[destination] = greenPawn;
+                    break;
+                case PlayerColor.Yellow:
+                    YellowPath[destination] = yellowPawn;
+                    break;
+            }
+            MoveMade();
+        }
+
+        public void NotifyCollision()
+        {
+            MoveMade();          
+        }
+        public void NotifyPawnFinished(Pawn.PawnState pawnState, PlayerColor playerColor, byte pawnPosition)
+        {
+            if (pawnState == Pawn.PawnState.AlmostFinished)
+            {
+                switch(playerColor)
+                {
+                    case PlayerColor.Red:
+                        RedPath[pawnPosition] = "";
+                        break;
+                    case PlayerColor.Blue:
+                        BluePath[pawnPosition] = "";
+                        break;
+                    case PlayerColor.Green:
+                        GreenPath[pawnPosition] = "";
+                        break;
+                    case PlayerColor.Yellow:
+                        YellowPath[pawnPosition] = "";
+                        break;
+                }
+            }
+            else
+            {
+                Tiles[pawnPosition] = "";
             }
             MoveMade();
         }
@@ -504,7 +705,11 @@ namespace Ludo.ViewModels
 
         private void PawnSelected(object parameter)
         {
-            _gameEngine.MovePawn(byte.Parse(parameter as string));
+            if (_isDiceEanbled == true)
+            {
+                return;
+            }
+            _gameEngine.MoveInPlayPawn(byte.Parse(parameter as string));
         }
 
         private ICommand _pawnBaseSelected;
@@ -520,14 +725,17 @@ namespace Ludo.ViewModels
 
         private void PawnBaseSelected(object parameter)
         {
+            if (_isDiceEanbled == true)
+            {
+                return;
+            }
+
             string[] parts = (parameter as string).Split(' ');
 
             if (parts[1] == CurrentPlayerTurn.Color.ToString())
             {
-                if (_gameEngine.ReleasePawnFromBaseCurrentPlayer())
-                {
-                    lastBasePawnClicked = byte.Parse(parts[0]);
-                }
+                lastBasePawnClicked = byte.Parse(parts[0]);
+                _gameEngine.ReleasePawnFromBaseCurrentPlayer();
             }          
         }
 
@@ -544,7 +752,16 @@ namespace Ludo.ViewModels
 
         private void PawnPathSelected(object parameter)
         {
-            int position = int.Parse(parameter as string);   
+            if (_isDiceEanbled == true)
+            {
+                return;
+            }
+            string[] parts = (parameter as string).Split(' ');
+
+            if (parts[1] == CurrentPlayerTurn.Color.ToString())
+            {
+                _gameEngine.MoveAlmostFinishedPawn(Player.StringToPlayerColor(parts[1]), byte.Parse(parts[0]));
+            }
         }
 
         #endregion

@@ -110,32 +110,7 @@ namespace LudoTesting
             gameEngine.FinishedTurn();
             player = gameEngine.CurrentPlayerTurn;
             player.Should().Be(gameEngine.Players[0]);
-        }
-
-        [TestMethod]
-        public void CheckWinState_CheckIfTheWinStateIsCorrect_WhenCalled()
-        {
-            var gameEngine = new GameEngine(_playerNames);
-
-            Player player = gameEngine.CheckWinState();
-
-            player.Should().BeNull();
-        }
-
-        [TestMethod]
-        public void ReleasePawnFromBase_CheckIfThePawnIsCorrectlyReleased_WhenCalled()
-        {
-            var gameEngine = new GameEngine(_playerNames);
-
-            foreach (var pawn in gameEngine.Players[0].Pawns)
-            {
-                pawn.State = Pawn.PawnState.Finished;
-            }
-
-            Player winner = gameEngine.CheckWinState();
-
-            winner.Should().Be(gameEngine.Players[0]);
-        }
+        }      
     }
 
 

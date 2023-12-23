@@ -64,9 +64,6 @@
     <Compile Include="View\BoardPage.xaml.cs">
       <DependentUpon>BoardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LeaderboardPage.xaml.cs">
-      <DependentUpon>LeaderboardPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\LobbyPage.xaml.cs">
       <DependentUpon>LobbyPage.xaml</DependentUpon>
     </Compile>
@@ -77,13 +74,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LeaderboardPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\LobbyPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -183,12 +176,6 @@
     <Resource Include="Images\PawnImages\greenHighlightedPawn.png" />
     <Resource Include="Images\PawnImages\redHighlightedPawn.png" />
     <Resource Include="Images\PawnImages\yellowHighlightedPawn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\white.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Images\black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

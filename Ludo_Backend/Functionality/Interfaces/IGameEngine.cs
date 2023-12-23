@@ -9,10 +9,9 @@ namespace Ludo_Backend.Functionaity.Interfaces
         Player CurrentPlayerTurn { get; set; }
 
         void FinishedTurn();
-        void MovePawn(byte pawnPosition);
-        bool CanMovePawn(Pawn pawn, byte steps);
+        void MoveInPlayPawn(byte pawnPosition);
+        bool MoveAlmostFinishedPawn(Player.PlayerColor playerColor, byte position);
         List<Pawn> AvailablePawnsToMoveForCurrentPlayer();
-        Player CheckWinState();
         bool ReleasePawnFromBaseCurrentPlayer();
         byte RollDice();
     }
