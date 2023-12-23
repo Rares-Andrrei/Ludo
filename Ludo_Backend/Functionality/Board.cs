@@ -85,11 +85,11 @@ namespace Ludo_Backend.Functionaity
             }
         }
 
-        public bool MoveInPlayPawn(byte pawnPosition, byte steps)
+        public bool MoveInPlayPawn(byte pawnPosition, byte steps, Player currentPlayer)
         {
             byte destination = CalculateDestination(pawnPosition, steps);
 
-            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.FirstOrDefault();
+            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.Where(oPawn => oPawn.Owner == currentPlayer).FirstOrDefault();
 
             if(pawn == null)
             {
@@ -155,7 +155,7 @@ namespace Ludo_Backend.Functionaity
         {
 
             byte destination = (byte)(pawnPosition + steps);
-            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.FirstOrDefault();
+            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.Where(oPawn => oPawn.Owner == currentPlayerTurn).FirstOrDefault();
             if (pawn == null)
             {
                 return false;
@@ -184,7 +184,7 @@ namespace Ludo_Backend.Functionaity
             {
                 return false;
             }
-            else if (pawn.State == Pawn.PawnState.AlmostFinished && destination > PlayerAreaTilesNumber + 1)
+            else if (pawn.State == Pawn.PawnState.AlmostFinished && destination > PlayerAreaTilesNumber)
             {
                 return false;
             }

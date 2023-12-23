@@ -64,7 +64,7 @@ namespace Ludo_Backend.Functionaity
         {
             if (board.IsMoveValid(pawnPosition, _diceValue, CurrentPlayerTurn))
             {
-                board.MoveInPlayPawn(pawnPosition, _diceValue);
+                board.MoveInPlayPawn(pawnPosition, _diceValue, CurrentPlayerTurn);
             }
         }
         private bool CanMovePawn(Pawn pawn, byte steps)
