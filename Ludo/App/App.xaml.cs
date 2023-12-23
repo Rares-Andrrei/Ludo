@@ -30,6 +30,9 @@ namespace Ludo
             serviceCollection.AddSingleton<StartingPageVM>();
             serviceCollection.AddSingleton<StartingPage>();
 
+            serviceCollection.AddSingleton<LobbyVM>();
+            serviceCollection.AddSingleton<LobbyPage>();
+
             serviceCollection.AddScope<BoardPage>();
             serviceCollection.AddScope<BoardVM>();
 

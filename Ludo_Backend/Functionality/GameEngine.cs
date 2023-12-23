@@ -1,4 +1,5 @@
 ﻿using Ludo_Backend.Functionaity.Interfaces;
+using Ludo_Backend.Observer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,23 @@ namespace Ludo_Backend.Functionaity
     {
         private const byte MaximumPlayesNr = 4;
 
+        private byte _diceValue;
+        private List<IGameEngineOberver> observers;
         private readonly Random random = new Random();
-        private Board board;
+        private IBoard board;
 
         public List<Player> Players { get; set; }
         public Player CurrentPlayerTurn { get; set; }
-        public List<Tile> Tiles { get; }
 
-        public GameEngine(string[] playersNames)
+        public GameEngine(List<string> playersNames)
         {
+            observers = new List<IGameEngineOberver>();
             InitializeGame(playersNames);
-            Tiles = board.Tiles;
         }
 
-        private void InitializeGame(string[] playersNames)
+        private void InitializeGame(List<string> playersNames)
         {
-            byte playersNr = (byte)playersNames.Length;
+            byte playersNr = (byte)playersNames.Count;
 
             if (playersNr > MaximumPlayesNr || playersNr < 2)
             {
@@ -53,35 +55,66 @@ namespace Ludo_Backend.Functionaity
 
         public byte RollDice()
         {
-            return (byte)random.Next(1, 7);
+            _diceValue = (byte)random.Next(1, 7);
+            observers.ForEach(observer => observer.NotifyDiceRolled(_diceValue));
+            return _diceValue;
         }
 
-        public bool MovePawn(Pawn pawn, byte steps)
+        public void MoveInPlayPawn(byte pawnPosition)
         {
-            return board.MovePawn(pawn, steps);
+            if (board.IsMoveValid(pawnPosition, _diceValue, CurrentPlayerTurn))
+            {
+                board.MoveInPlayPawn(pawnPosition, _diceValue);
+            }
         }
-
-        public bool CanMovePawn(Pawn pawn, byte steps)
+        private bool CanMovePawn(Pawn pawn, byte steps)
         {
             return board.CanMovePawn(pawn, steps);
         }
 
-        public bool ReleasePawnFromBase(Pawn pawn)
+        public bool ReleasePawnFromBaseCurrentPlayer()
         {
-            return board.ReleasePawnFromBase(pawn);
+            if(_diceValue != 6)
+            {
+                return false;
+            }
+            return board.ReleasePawnFromBase(CurrentPlayerTurn);
         }
 
-        public Player CheckWinState()
+        public void Attach(IGameEngineOberver observer)
         {
-            foreach (Player player in Players)
+            observers.Add(observer);
+            board.Attach(observer);
+        }
+
+        public void Detach(IGameEngineOberver observer)
+        {
+            observers.Remove(observer);
+            board.Detach(observer);
+        }
+
+        public List<Pawn> AvailablePawnsToMoveForCurrentPlayer()
+        {
+            List<Pawn> pawns = new List<Pawn>();
+            CurrentPlayerTurn.Pawns.ForEach(pawn =>
             {
-                if (player.Pawns.All(pawn => pawn.State == Pawn.PawnState.Finished))
+                if (CanMovePawn(pawn, _diceValue))
                 {
-                    return player;
+                    pawns.Add(pawn);
                 }
+            });
+
+            return pawns;
+        }
+
+        public bool MoveAlmostFinishedPawn(Player.PlayerColor playerColor, byte position)
+        {
+            if (playerColor != CurrentPlayerTurn.Color)
+            {
+                return false;
             }
 
-            return null;
+            return board.MoveAlmostFinishedPawn(playerColor, position, _diceValue);
         }
     }
 }

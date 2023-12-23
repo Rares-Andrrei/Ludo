@@ -59,12 +59,10 @@
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\BoardVM.cs" />
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModels\LobbyVM.cs" />
     <Compile Include="ViewModels\StartingPageVM.cs" />
     <Compile Include="View\BoardPage.xaml.cs">
       <DependentUpon>BoardPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LeaderboardPage.xaml.cs">
-      <DependentUpon>LeaderboardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LobbyPage.xaml.cs">
       <DependentUpon>LobbyPage.xaml</DependentUpon>
@@ -76,13 +74,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LeaderboardPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\LobbyPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -93,8 +87,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service\InjectAttribute.cs" />
-    <Compile Include="Service\IObserver.cs" />
-    <Compile Include="Service\ISubject.cs" />
     <Compile Include="Service\ServiceCollection.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -157,12 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\centerBase.jpg" />
-    <Resource Include="Images\five.png" />
-    <Resource Include="Images\four.png" />
-    <Resource Include="Images\one.png" />
-    <Resource Include="Images\six.png" />
-    <Resource Include="Images\three.png" />
-    <Resource Include="Images\two.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ludo_Backend\Ludo_Backend.csproj">
@@ -171,13 +157,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\bluePlayer.png" />
-    <Resource Include="Images\greenPlayer.png" />
-    <Resource Include="Images\redPlayer.png" />
-    <Resource Include="Images\yellowPlayer.png" />
+    <Resource Include="Images\lobbyBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\lobbyBackground.jpg" />
+    <Resource Include="Images\lobbyPlayers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DiceImages\dice.jpeg" />
+    <Resource Include="Images\DiceImages\five.png" />
+    <Resource Include="Images\DiceImages\four.png" />
+    <Resource Include="Images\DiceImages\one.png" />
+    <Resource Include="Images\DiceImages\six.png" />
+    <Resource Include="Images\DiceImages\three.png" />
+    <Resource Include="Images\DiceImages\two.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PawnImages\blueHighlightedPawn.png" />
+    <Resource Include="Images\PawnImages\greenHighlightedPawn.png" />
+    <Resource Include="Images\PawnImages\redHighlightedPawn.png" />
+    <Resource Include="Images\PawnImages\yellowHighlightedPawn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

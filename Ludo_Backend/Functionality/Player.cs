@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Policy;
 
 namespace Ludo_Backend.Functionaity
 {
@@ -7,9 +8,31 @@ namespace Ludo_Backend.Functionaity
         public enum PlayerColor
         {
             Blue,
-            Green,
-            Red,
             Yellow,
+            Red,
+            Green
+        }
+
+        public static PlayerColor StringToPlayerColor(string color)
+        {
+            switch (color)
+            {
+                case "Blue":
+                    return PlayerColor.Blue;
+                case "Yellow":
+                    return PlayerColor.Yellow;
+                case "Red":
+                    return PlayerColor.Red; ;
+                default:
+                    return PlayerColor.Green;
+            }
+            
+        }
+
+        public Player()
+        {
+            Pawns = new List<Pawn>();
+            Score = 0;
         }
 
         public string Name { get; set; }
@@ -17,5 +40,6 @@ namespace Ludo_Backend.Functionaity
         public byte EndPosition { get; set; }
         public List<Pawn> Pawns { get; set; }
         public PlayerColor Color { get; set; }
+        public byte Score { get; set; }
     }
 }

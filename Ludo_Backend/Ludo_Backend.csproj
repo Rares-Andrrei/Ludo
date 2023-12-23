@@ -48,6 +48,8 @@
     <Compile Include="Functionality\Pawn.cs" />
     <Compile Include="Functionality\Player.cs" />
     <Compile Include="Functionality\Tile.cs" />
+    <Compile Include="Observer\IGameEngineOberver.cs" />
+    <Compile Include="Observer\IGameEngineSubject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
