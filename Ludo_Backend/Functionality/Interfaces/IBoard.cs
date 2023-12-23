@@ -5,8 +5,6 @@ namespace Ludo_Backend.Functionaity.Interfaces
 {
     public interface IBoard : IGameEngineSubject
     {
-        List<Tile> Tiles { get; set; }
-
         bool MoveAlmostFinishedPawn(Player.PlayerColor playerColor, byte position, byte steps);
         bool MoveInPlayPawn(byte pawnPosition, byte steps, Player currentPlayer);
         bool IsMoveValid(byte pawnPosition, byte steps, Player currentPlayerTurn);

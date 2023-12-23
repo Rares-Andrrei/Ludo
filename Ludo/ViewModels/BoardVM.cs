@@ -7,9 +7,6 @@ using Ludo_Backend.Observer;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using static Ludo_Backend.Functionaity.Player;
@@ -589,7 +586,7 @@ namespace Ludo.ViewModels
 
             StartingPage startPage = _serviceCollection.GetService<StartingPage>();
             _navigationService.NavigateTo(startPage);
-            
+
         }
 
         public void NotifyAlmostFinishedPawnMoveMade(Player.PlayerColor playerColor, byte pawnPosition, byte destination)
@@ -642,7 +639,7 @@ namespace Ludo.ViewModels
         {
             if (pawnState == Pawn.PawnState.AlmostFinished)
             {
-                switch(playerColor)
+                switch (playerColor)
                 {
                     case PlayerColor.Red:
                         RedPath[pawnPosition] = "";
@@ -732,7 +729,7 @@ namespace Ludo.ViewModels
             {
                 lastBasePawnClicked = byte.Parse(parts[0]);
                 _gameEngine.ReleasePawnFromBaseCurrentPlayer();
-            }          
+            }
         }
 
         private ICommand _pawnPathSelected;

@@ -13,12 +13,12 @@ namespace Ludo_Backend.Functionaity
         private const byte TilesNumber = 52;
         private const byte PlayerAreaTilesNumber = 5;
 
-        public List<Tile> Tiles { get; set; }
-        public List<Pawn> InAlmostFinishedPathPawns { get; set; }
+        private List<Tile> tiles;
+        private List<Pawn> inAlmostFinishedPathPawns;
 
         public Board(List<Player> players)
         {
-            InAlmostFinishedPathPawns = new List<Pawn>();
+            inAlmostFinishedPathPawns = new List<Pawn>();
             observers = new List<IGameEngineOberver>();
             InitializeBoard(players);
             InitializePawns(players);
@@ -40,11 +40,11 @@ namespace Ludo_Backend.Functionaity
 
         private void InitializeBoard(List<Player> players)
         {
-            Tiles = Enumerable.Repeat<Tile>(null, 52).ToList();
+            tiles = Enumerable.Repeat<Tile>(null, 52).ToList();
 
             for (byte i = 0; i < TilesNumber; i++)
             {
-                Tiles[i] = new Tile { BoardPosition = i, IsSafezone = false, CurrentOwnerPawns = new List<Pawn>() };
+                tiles[i] = new Tile { BoardPosition = i, IsSafezone = false, CurrentOwnerPawns = new List<Pawn>() };
             }
 
             List<byte> startingPositions = new List<byte> { 0, 13, 26, 39 };
@@ -53,7 +53,7 @@ namespace Ludo_Backend.Functionaity
 
             for (byte i = 0; i < MaximumPlayesNr; i++)
             {
-                Tiles[startingPositions[i]].IsSafezone = true;
+                tiles[startingPositions[i]].IsSafezone = true;
                 if (players.Count > i)
                 {
                     players[i].Color = playerColors[i];
@@ -89,7 +89,7 @@ namespace Ludo_Backend.Functionaity
         {
             byte destination = CalculateDestination(pawnPosition, steps);
 
-            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.Where(oPawn => oPawn.Owner == currentPlayer).FirstOrDefault();
+            Pawn pawn = tiles[pawnPosition].CurrentOwnerPawns.Where(oPawn => oPawn.Owner == currentPlayer).FirstOrDefault();
 
             if(pawn == null)
             {
@@ -98,14 +98,14 @@ namespace Ludo_Backend.Functionaity
 
             if (pawn.State == Pawn.PawnState.InPlay)
             {
-                Tiles[pawnPosition].CurrentOwnerPawns.Remove(pawn);
+                tiles[pawnPosition].CurrentOwnerPawns.Remove(pawn);
 
                 if (pawn.Position == pawn.Owner.EndPosition && steps == 6)
                 {
                     pawn.State = Pawn.PawnState.Finished;
                     PlayerScored(pawn.Owner);
                     observers.ForEach(observer => observer.NotifyPawnFinished(Pawn.PawnState.InPlay, pawn.Owner.Color, pawn.Position));
-                    InAlmostFinishedPathPawns.Remove(pawn);
+                    inAlmostFinishedPathPawns.Remove(pawn);
 
                 }
                 else if (pawnPosition + steps > pawn.Owner.EndPosition && pawnPosition <= pawn.Owner.EndPosition)
@@ -113,14 +113,14 @@ namespace Ludo_Backend.Functionaity
                     int extraSteps = pawnPosition + steps - pawn.Owner.EndPosition - 1;
                     pawn.State = Pawn.PawnState.AlmostFinished;
                     pawn.Position = (byte)extraSteps;
-                    InAlmostFinishedPathPawns.Add(pawn);
+                    inAlmostFinishedPathPawns.Add(pawn);
                     observers.ForEach(observer => observer.NotifyInPlayToAlmostFinishedPawnMoveMade(pawn.Owner.Color, pawnPosition, (byte)extraSteps));
                 }
                 else
                 {
                     if (CheckCollision(pawn, destination))
                     {
-                        Tiles[pawnPosition].CurrentOwnerPawns.Add(pawn);
+                        tiles[pawnPosition].CurrentOwnerPawns.Add(pawn);
                         return true;
                     }
 
@@ -134,11 +134,11 @@ namespace Ludo_Backend.Functionaity
 
         private bool CheckCollision(Pawn pawn, byte destination)
         {
-            if (Tiles[destination].IsSafezone)
+            if (tiles[destination].IsSafezone)
             {
                 return false;
             }
-            if (Tiles[destination].CurrentOwnerPawns.Count != 0 && Tiles[destination].CurrentOwnerPawns.First().Owner != pawn.Owner)
+            if (tiles[destination].CurrentOwnerPawns.Count != 0 && tiles[destination].CurrentOwnerPawns.First().Owner != pawn.Owner)
             {
                 return true;
             }
@@ -147,7 +147,7 @@ namespace Ludo_Backend.Functionaity
 
         private void AddPawnToTile(Pawn pawn, byte tileNr)
         {
-            Tiles[tileNr].CurrentOwnerPawns.Add(pawn);
+            tiles[tileNr].CurrentOwnerPawns.Add(pawn);
             pawn.Position = tileNr;
         }
 
@@ -155,7 +155,7 @@ namespace Ludo_Backend.Functionaity
         {
 
             byte destination = (byte)(pawnPosition + steps);
-            Pawn pawn = Tiles[pawnPosition].CurrentOwnerPawns.Where(oPawn => oPawn.Owner == currentPlayerTurn).FirstOrDefault();
+            Pawn pawn = tiles[pawnPosition].CurrentOwnerPawns.Where(oPawn => oPawn.Owner == currentPlayerTurn).FirstOrDefault();
             if (pawn == null)
             {
                 return false;
@@ -211,21 +211,11 @@ namespace Ludo_Backend.Functionaity
             return true;
         }
 
-        public void Attach(IGameEngineOberver observer)
-        {
-            observers.Add(observer);
-        }
-
-        public void Detach(IGameEngineOberver observer)
-        {
-            observers.Remove(observer);
-        }
-
         public bool MoveAlmostFinishedPawn(Player.PlayerColor playerColor, byte position, byte steps)
         {
             byte destination = (byte)(position + steps);
 
-            Pawn pawn = InAlmostFinishedPathPawns.Where(oPawn => oPawn.Owner.Color == playerColor && oPawn.Position == position).FirstOrDefault();
+            Pawn pawn = inAlmostFinishedPathPawns.Where(oPawn => oPawn.Owner.Color == playerColor && oPawn.Position == position).FirstOrDefault();
 
             if (pawn == null)
             {
@@ -239,7 +229,7 @@ namespace Ludo_Backend.Functionaity
                     pawn.State = Pawn.PawnState.Finished;
                     PlayerScored(pawn.Owner);
                     observers.ForEach(observer => observer.NotifyPawnFinished(Pawn.PawnState.AlmostFinished, pawn.Owner.Color, pawn.Position));
-                    InAlmostFinishedPathPawns.Remove(pawn);
+                    inAlmostFinishedPathPawns.Remove(pawn);
                 }
                 else if (destination > PlayerAreaTilesNumber)
                 {
@@ -252,6 +242,16 @@ namespace Ludo_Backend.Functionaity
                 }
             }
             return true;
+        }
+
+        public void Attach(IGameEngineOberver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void Detach(IGameEngineOberver observer)
+        {
+            observers.Remove(observer);
         }
     }
 }

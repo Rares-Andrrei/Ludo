@@ -21,14 +21,5 @@ namespace LudoTesting
                 _players.Add(new Player { Name = name });
             }
         }
-
-        [TestMethod]
-        public void Cosntructor_CorrectInitialization_WhenCalled()
-        {
-            _board = new Board(_players);
-
-            _board.Tiles.Count.Should().Be(52);
-        }
-
     }
 }
