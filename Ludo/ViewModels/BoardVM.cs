@@ -638,10 +638,6 @@ namespace Ludo.ViewModels
             MoveMade();
         }
 
-        public void NotifyCollision()
-        {
-            MoveMade();          
-        }
         public void NotifyPawnFinished(Pawn.PawnState pawnState, PlayerColor playerColor, byte pawnPosition)
         {
             if (pawnState == Pawn.PawnState.AlmostFinished)

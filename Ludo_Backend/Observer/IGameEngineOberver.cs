@@ -11,7 +11,6 @@ namespace Ludo_Backend.Observer
         void NotifyInPlayPawnMoveMade(byte pawnPosition, byte destination);
         void NotifyAlmostFinishedPawnMoveMade(Player.PlayerColor playerColor, byte pawnPosition, byte destination);
         void NotifyInPlayToAlmostFinishedPawnMoveMade(Player.PlayerColor playerColor, byte pawnPosition, byte destination);
-        void NotifyCollision();
         void NotifyPawnFinished(Pawn.PawnState pawnState, Player.PlayerColor playerColor, byte pawnPosition);
     }
 }
