@@ -9,8 +9,8 @@ namespace Ludo_Backend.Functionaity
         {
             Blue,
             Yellow,
-            Red,
-            Green
+            Green,
+            Red
         }
 
         public static PlayerColor StringToPlayerColor(string color)

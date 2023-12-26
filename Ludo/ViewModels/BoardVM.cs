@@ -332,6 +332,7 @@ namespace Ludo.ViewModels
 
             if (availablePawns.Count == 0)
             {
+                MessageBox.Show($"No available moves for player: {CurrentPlayerTurn.Name}", "Info", MessageBoxButton.OK);
                 MoveMade();
                 return;
             }
