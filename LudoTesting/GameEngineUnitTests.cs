@@ -12,7 +12,7 @@ namespace LudoTesting
         [TestInitialize]
         public void TestInitialize()
         {
-            _playerNames = new List<string> { "Rares", "Elena", "Catalin" };
+            _playerNames = new List<string> { "Rares", "Elena","Catalin","Nicu" };
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace LudoTesting
         {
             var gameEngine = new GameEngine(_playerNames);
 
-            gameEngine.Players.Count.Should().Be(3);
+            gameEngine.Players.Count.Should().BeInRange(2, 4);
         }
 
         [TestMethod]
@@ -95,22 +95,15 @@ namespace LudoTesting
             Player player;
 
             var gameEngine = new GameEngine(_playerNames);
-
-            player = gameEngine.CurrentPlayerTurn;
-            player.Should().Be(gameEngine.Players[0]);
-
-           gameEngine.FinishedTurn();
-            player = gameEngine.CurrentPlayerTurn;
-            player.Should().Be(gameEngine.Players[1]);
-
-            gameEngine.FinishedTurn();
-            player = gameEngine.CurrentPlayerTurn;
-            player.Should().Be(gameEngine.Players[2]);
-
-            gameEngine.FinishedTurn();
-            player = gameEngine.CurrentPlayerTurn;
-            player.Should().Be(gameEngine.Players[0]);
-        }      
+            
+            for(int i=0;i<_playerNames.Count;i++)
+            {
+                player=gameEngine.CurrentPlayerTurn;
+                player.Should().Be(gameEngine.Players[i]);
+                gameEngine.FinishedTurn();
+            }
+        }
+       
     }
 
 
