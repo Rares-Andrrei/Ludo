@@ -184,10 +184,5 @@ namespace LudoTesting
             Assert.AreEqual(Pawn.PawnState.AlmostFinished, _players[0].Pawns[0].State, "Expected pawn to be in Almost Finished state");
         }
 
-
-
-
-
-
     }
 }
