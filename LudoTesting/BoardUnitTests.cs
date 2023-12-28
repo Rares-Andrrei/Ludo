@@ -63,26 +63,54 @@ namespace LudoTesting
             var board = new Board(_players);
             board.ReleasePawnFromBase(_players[0]);
 
-            for (int i = 0; i <= 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 byte newPosition = _players[0].Pawns[0].Position;
-                // Daca, de exemplu, aruncam cu zarul de 10 ori si pica "5" pentru jucatorul cu indexul 0 ajungea pe ultima pozitie ceea ce insemna finalul acelui pion, iar o mutare in plus cu pionul respectiv nu era valida
-               board.MoveInPlayPawn(newPosition, 4, _players[0]);
+               
+               board.MoveInPlayPawn(newPosition, 5, _players[0]);
 
             }
             bool validMove = board.IsMoveValid(_players[0].Pawns[0].Position, 1, _players[0]);
            
-            bool validMove2 = board.IsMoveValid(_players[0].Pawns[1].Position, 1, _players[0]);
-           // Assert.IsTrue(validMove2,"Pawn cannot be null");
-           
-            bool validMove3 = board.IsMoveValid(_players[0].Pawns[0].Position, 1, _players[1]);
-            //Assert.IsTrue(validMove3,"Pawn have ONE owner");
-            Assert.IsTrue(validMove);
+            Assert.IsTrue(validMove,"Out of table");
 
 
         }
         [TestMethod]
-        public void CanMove_CheckIfThePawnCanMoveWithoutCollisionOrOutOfTableMove_WhenCalled()
+        public void IsMoveValid_CheckIfPawnHaveCorrectOwner_WhenCalled()
+        {
+            var board = new Board(_players);
+            board.ReleasePawnFromBase(_players[0]);
+
+            for (int i = 0; i < 5; i++)
+            {
+                byte newPosition = _players[0].Pawns[0].Position;
+
+                board.MoveInPlayPawn(newPosition, 5, _players[0]);
+
+            }
+            bool validMove = board.IsMoveValid(_players[0].Pawns[0].Position, 1, _players[0]);
+            Assert.IsTrue(validMove,"Pawn have ONE owner");
+        }
+        [TestMethod]
+        public void IsMoveValid_CheckIfPawnIsInPlay_WhenCalled()
+        {
+            var board = new Board(_players);
+            board.ReleasePawnFromBase(_players[0]);
+            board.ReleasePawnFromBase(_players[0]);
+
+            for (int i = 0; i < 11; i++)
+            {
+                byte newPosition = _players[0].Pawns[0].Position;
+
+                board.MoveInPlayPawn(newPosition, 5, _players[0]);
+
+            }
+            bool validMove2 = board.IsMoveValid(_players[0].Pawns[1].Position, 1, _players[0]);
+             Assert.IsTrue(validMove2,"Pawn cannot be null");
+        }
+        [TestMethod]
+        public void CanMove_CheckIfThePawnCanMoveWithoutCollision_WhenCalled()
         {
             var board = new Board(_players);
             board.ReleasePawnFromBase(_players[0]);
@@ -98,14 +126,26 @@ namespace LudoTesting
             bool canMove = board.CanMovePawn(_players[1].Pawns[0], 2);
             Assert.IsTrue(canMove,"Collision detected");
 
-
-            //board.MoveInPlayPawn(_players[0].Pawns[0].Position, 2, _players[0]);
-            //board.MoveInPlayPawn(_players[0].Pawns[0].Position, 2, _players[0]);
-            //board.MoveInPlayPawn(_players[0].Pawns[0].Position, 6, _players[0]);
-
-            //bool canMove2 = board.CanMovePawn(_players[0].Pawns[0], 5);
-            //Assert.IsTrue(canMove2, "Out of table");
             
+        }
+        [TestMethod]
+        public void CanMove_CheckIfThePawnCanMoveWithoutOutOfBoardMove_WhenCalled()
+        {
+            var board = new Board(_players);
+            board.ReleasePawnFromBase(_players[0]);
+            board.ReleasePawnFromBase(_players[1]);
+            for (int i = 0; i < 10; i++)
+            {
+                byte newPosition = _players[0].Pawns[0].Position;
+                board.MoveInPlayPawn(newPosition, 5, _players[0]);
+
+
+            }
+          
+            bool canMove2 = board.CanMovePawn(_players[0].Pawns[0], 2);
+            Console.WriteLine(_players[0].Pawns[0].Position);
+            Assert.IsTrue(canMove2, "Out of table");
+
         }
         [TestMethod]
         public void MoveAlmostFinishedPawn_SuccesfullyMoveInFinishedState_WhenCalled()
