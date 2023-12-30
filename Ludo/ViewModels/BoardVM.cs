@@ -585,8 +585,11 @@ namespace Ludo.ViewModels
                     break;
             }
 
-            StartingPage startPage = _serviceCollection.GetService<StartingPage>();
-            _navigationService.NavigateTo(startPage);
+            LobbyPage lobbyPage = _serviceCollection.GetService<LobbyPage>();
+            _navigationService.NavigateTo(lobbyPage);
+
+            //StartingPage startPage = _serviceCollection.GetService<StartingPage>();
+            //_navigationService.NavigateTo(startPage);
 
         }
 
