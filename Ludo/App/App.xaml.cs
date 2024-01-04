@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Ludo.Service;
+using Ludo.View;
+using Ludo.ViewModels;
+using System;
 using System.Windows;
 
 namespace Ludo
@@ -13,5 +11,42 @@ namespace Ludo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ServiceCollection serviceCollection = InitializeServices();
+            InitializeWindow(serviceCollection);
+
+            base.OnStartup(e);
+        }
+
+        private ServiceCollection InitializeServices()
+        {
+            ServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton(serviceCollection);
+
+            serviceCollection.AddSingleton<NavigationService>();
+            serviceCollection.AddSingleton<MainWindow>();
+
+            serviceCollection.AddSingleton<StartingPageVM>();
+            serviceCollection.AddSingleton<StartingPage>();
+
+            serviceCollection.AddSingleton<LobbyVM>();
+            serviceCollection.AddSingleton<LobbyPage>();
+
+            serviceCollection.AddScope<BoardPage>();
+            serviceCollection.AddScope<BoardVM>();
+
+            return serviceCollection;
+        }
+
+        public void InitializeWindow(ServiceCollection serviceCollection)
+        {
+            NavigationService navService = serviceCollection.GetService<NavigationService>();
+            StartingPage startingPage = serviceCollection.GetService<StartingPage>();
+            navService.NavigateTo(startingPage);
+
+            this.MainWindow = serviceCollection.GetService<MainWindow>();
+            this.MainWindow.Show();
+        }
     }
 }
