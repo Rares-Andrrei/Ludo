@@ -208,6 +208,7 @@ namespace Ludo_Backend.Functionaity
             playerPawn.State = Pawn.PawnState.InPlay;
             AddPawnToTile(playerPawn, playerPawn.Owner.StartPosition);
             observers.ForEach(observer => observer.NotifyPawnReleasedFromBase(playerPawn.Owner.Color, playerPawn.Owner.StartPosition));
+           
             return true;
         }
 
@@ -253,5 +254,7 @@ namespace Ludo_Backend.Functionaity
         {
             observers.Remove(observer);
         }
+
+      
     }
 }

@@ -4,6 +4,7 @@ using Ludo.ViewModels.Commands;
 using Ludo_Backend.Functionaity;
 using Ludo_Backend.Functionaity.Interfaces;
 using Ludo_Backend.Observer;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -31,11 +32,20 @@ namespace Ludo.ViewModels
         private readonly NavigationService _navigationService;
         private readonly ServiceCollection _serviceCollection;
 
+        private IGameEngineOberver _observer;
+        private IBoard _boardLogic;
         public BoardVM(ServiceCollection serviceCollection, NavigationService navigationService)
         {
             _navigationService = navigationService;
             _serviceCollection = serviceCollection;
         }
+        public BoardVM(IGameEngineOberver observer, Board board)
+        {
+            _observer = observer;
+            _boardLogic = board;
+            _boardLogic.Attach(_observer);
+        }
+
 
         private IGameEngine _gameEngine;
         private ObservableCollection<string> _tiles;
@@ -510,14 +520,14 @@ namespace Ludo.ViewModels
         #region Notify
 
         public void NotifyDiceRolled(byte diceValue)
-        {
+        {   
             _isDiceEanbled = false;
             ChangeDiceValue(diceValue);
             ShowAvailableMoves(diceValue);
         }
 
         public void NotifyInPlayPawnMoveMade(byte pawnPosition, byte destination)
-        {
+        { 
             RemoveHighlihtFromAllPawns();
             Tiles[pawnPosition] = "";
             Tiles[destination] = $"\\Images\\PawnImages\\{CurrentPlayerTurn.Color.ToString().ToLower()}Pawn.png";
